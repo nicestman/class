@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>全屏网站</title>
+		
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			body{
+				overflow: hidden;
+				position: relative;
+			}
+			.box{
+				position: absolute;
+				left:0;
+				top:0px;
+				transition: 1s;
+			}
+			.box div:nth-of-type(1){
+				background: lightblue;
+			}
+			.box div:nth-of-type(2){
+				background: #333;
+			}
+			.box div:nth-of-type(3){
+				background: #000;
+			}
+			.box div:nth-of-type(4){
+				background: pink;
+			}
+			#nav{
+				position: fixed;
+				right:40px;
+				top:40%;
+			}
+			#nav span{
+				width:20px;
+				height:20px;
+				background: #fff;
+				border-radius: 20px;
+				display: block;
+				margin-bottom: 20px;
+				opacity: .5;
+				transition: 1s;
+			}
+			#nav .active{
+				opacity: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box" id="box"></div>
+		<nav id="nav"></nav>
+		
+	<script type="text/javascript">
+		var box = document.getElementById('box');
+		var nav = document.getElementById('nav');
+		var iW = window.innerWidth;
+		var iH = window.innerHeight;
+		for(var i=0;i<4;i++){
+			box.innerHTML += '<div></div>';
+			nav.innerHTML += "<span></span>";
+		}
+		var divs = box.getElementsByTagName('div');
+		var spans = nav.getElementsByTagName('span');
+		for(var i=0;i<divs.length;i++){
+			divs[i].style.width = iW + 'px';
+			divs[i].style.height = iH + 'px';
+		}
+		spans[0].className = 'active';
+		
+		
+		wheel(box,fnDown,fnUp);
+		
+		var num = 0;
+		var onoff = true;
+		function fnDown(){
+			if(onoff){
+				num--;
+				if(num <-(divs.length-1)){
+					num = -(divs.length-1);
+				}	
+				box.style.top = num * iH + 'px';
+				onoff = !onoff;
+				setBg();
+				setTimeout(function(){
+					onoff = !onoff;
+				},1500)			
+			}		
+		}
+		
+		function fnUp(){
+			if(onoff){
+				num++;
+				if(num>0){
+					num=0;
+				}
+				box.style.top = num * iH + 'px';
+				onoff = !onoff;
+				setBg();
+				setTimeout(function(){
+					onoff = !onoff;
+				},1500)		
+			}
+		}
+		
+		
+		function setBg(){
+			for(var i=0;i<spans.length;i++){
+				spans[i].className = '';
+			}
+			spans[-num].className = 'active';
+		}
+		
+		function wheel(obj,fnDown,fnUp){
+			var use = window.navigator.userAgent.toLowerCase();
+			if(use.indexOf('firefox') == '-1'){
+				obj.addEventListener('mousewheel',fn)//此事件写法不兼容IE
+			}else{
+				obj.addEventListener('DOMMouseScroll',fn)//此事件写法不兼容IE
+			}
+			function fn(ev){
+				var down = true;
+				if(ev.detail){				
+					down = ev.detail>0?false:true;//火狐滚轮上正，下负
+				}else{	
+					down = ev.wheelDelta<0?false:true;//除火狐外滚轮上负，下正
+				}
+				if(down){
+					//console.log('上')
+					fnUp();
+				}else{
+					//console.log("下")
+					fnDown();
+				}
+			}
+		}
+	</script>
+		
+		
+	</body>
+</html>
