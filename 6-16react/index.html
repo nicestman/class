@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+		<script type="text/javascript" src="js/react.js"></script>
+		<script type="text/javascript" src="js/react-dom.js"></script>
+		<script type="text/javascript" src="js/browser.min.js"></script>
+		
+		
+	</head>
+	<body>
+		<div id="box"></div>
+		<script type="text/babel">
+			/*
+			 	React : 作用于v层的js库，mvc
+			 * 
+			 * 特点：
+			 * 		1.虚拟dom
+			 * 		2.组件化
+			 * 		3.单向数据流
+			 * 
+			 * 
+			*/
+			let arr = [1,2,3,4];
+			let Parent = React.createClass({
+				render:function(){
+					return (
+						<div onClick={this.initData}>wwwww
+							<h3 ref="cont">
+								<span>qqq</span>
+								<span>www</span>
+								<span>eee</span>
+							</h3>
+						
+						</div>
+					)
+				},
+				getInitalState:function(){
+					return ({
+						data:this.props.data
+					})
+				},
+				initData:function(){
+					let ch = this.refs.cont.children;
+					console.log(ch)
+				}
+			})
+			
+			ReactDOM.render(
+				<Parent data={arr}/>,
+				document.getElementById('box')
+			)
+			
+		</script>
+	</body>
+</html>

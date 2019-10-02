@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+		<script type="text/javascript" src="js/react.js"></script>
+		<script type="text/javascript" src="js/react-dom.js"></script>
+		<script type="text/javascript" src="js/browser.min.js"></script>
+		
+	<style type="text/css">
+		li{
+			list-style: none;
+			width:300px;
+		}
+	</style>
+		
+	</head>
+	<body>
+		<div id="box"></div>
+		<script type="text/babel">
+			
+			let dataArr = ['你吃了吗','这么了，你想请客啊','想吃什么','麻辣烫，怎么样'];
+			let Item = React.createClass({
+				render:function(){
+					return (
+						<li>
+							<span>{this.props.data}</span>
+							<span style={{"float":"right"}} onClick={this.deleteItem}>x</span>
+						</li>
+					)
+				},
+				deleteItem:function(){
+					let val = this.props.data;
+					this.props.btn(val)
+				}
+			})
+			
+			let Parent = React.createClass({
+				render:function(){
+					let emptyArr = [];
+					let that = this;
+					emptyArr = this.state.listData.map(function(item,index){
+						return <Item data={item} key={index} btn={that.twoChange}/>
+					})
+					
+					return (
+						<div className="container">
+							<div className="form-group">
+								<div className="input-group">
+									<input type="text" ref="text1"/>
+									<button className=" btn" onClick={this.addCont}>提交</button>
+								</div>
+							</div>
+							<ul >
+								{emptyArr}
+							</ul>
+						</div>
+						
+					)
+				},
+				addCont:function(){
+					let val = this.refs.text1.value;
+					let arr = []
+					arr = this.state.listData;
+					arr.push(val);
+					this.setState({
+						listData:arr
+					})
+					
+					this.refs.text1.value = '';
+				},
+				getInitialState:function(){
+					return ({
+						listData:this.props.data
+					})
+				},
+				twoChange:function(val){
+					let arr = [];
+					arr = this.state.listData.filter(function(item,index){
+						return item != val;
+					})
+					this.setState({
+						listData:arr
+					})
+				}
+			})	
+			ReactDOM.render(
+				<Parent data={dataArr}/>,
+				document.getElementById('box')
+			)
+			
+		</script>
+	</body>
+</html>

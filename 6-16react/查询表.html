@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+		<script type="text/javascript" src="js/react.js"></script>
+		<script type="text/javascript" src="js/react-dom.js"></script>
+		<script type="text/javascript" src="js/browser.min.js"></script>
+		<script type="text/javascript" src="js/pubsub.js"></script>
+		
+		
+	</head>
+	<body>
+		<div id="box"></div>
+		<!--<div class="container">
+			<h2>学员信息表</h2>	
+			<div class="bs-example">
+				<div class="form-group">
+					<label for="">按名字查训</label>
+					<input type="text" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="">按性别查训</label>
+					<select name="" class="form-control">
+						<option value="all">all</option>
+						<option value="1">男</option>
+						<option value="0">女</option>
+					</select>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>姓名</th>
+								<th>年龄</th>
+								<th>身高</th>
+								<th>体重</th>
+								<th>性别</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>劳敏芝</td>
+								<td>20</td>
+								<td>170</td>
+								<td>80</td>
+								<td>女</td>
+								<td>删除</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+		</div>-->
+		
+		<script type="text/babel">
+			let listArr=[
+				{name:"劳敏芝",age:20,height:170,weight:60,sex:'女',_id:1},
+				{name:"劳敏芝",age:30,height:160,weight:120,sex:'男',_id:2},
+				{name:"王奕欢",age:18,height:178,weight:160,sex:'女',_id:3},
+				{name:"王奕欢",age:20,height:155,weight:50,sex:'男',_id:4},
+				{name:"曾孝都",age:23,height:160,weight:59,sex:'女',_id:5},
+				{name:"曾孝都",age:18,height:165,weight:60,sex:'男',_id:6},
+				{name:"李峰",age:20,height:170,weight:60,sex:'女',_id:7},
+				{name:"李峰",age:10,height:180,weight:80,sex:'男',_id:8},
+				{name:"李海源",age:20,height:170,weight:60,sex:'女',_id:9},
+			];
+			
+			
+			let Tbody = React.createClass({
+				render:function(){
+					let obj = this.props.data;
+					
+					return (
+						<tr>
+							<td>{obj.name}</td>
+							<td>{obj.age}</td>
+							<td>{obj.height}</td>
+							<td>{obj.weight}</td>
+							<td>{obj.sex}</td>
+							<td><a herf="javascript:;" onClick={this.deletItem}>删除 </a></td>
+						</tr>
+					)
+				},
+				deletItem:function(){
+					PubSub.publish('deletItem',this.props.data._id)
+				}
+			})
+			
+			let Tabel = React.createClass({
+				render:function(){
+					let arr = [];
+					let sexArr = ['女','男'];
+					let sex = this.props.sex;
+					let name = this.props.name;
+					
+					
+					arr = this.props.data.map(function(item,index){
+					
+						if(!sexArr[sex]&&!name){
+							return <Tbody data={item} key={index}/>
+						}else{
+							if(sexArr[sex]==item.sex&&name==item.name){
+								console.log(1);
+								return <Tbody data={item} key={index}/>
+							}
+							if(!sexArr[sex]){
+								if(name==item.name){
+									return <Tbody data={item} key={index}/>
+								}
+								
+							}
+							if(!name){
+								if(sexArr[sex]==item.sex){
+									return <Tbody data={item} key={index}/>
+								}
+							}
+							
+						}
+						
+						
+						
+					})
+					
+					return (
+						<div className="table-responsive">
+							<table className="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>姓名</th>
+										<th>年龄</th>
+										<th>身高</th>
+										<th>体重</th>
+										<th>性别</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									{arr}
+								</tbody>
+							</table>
+						</div>
+					)
+				}
+			})
+			
+			
+			let Main = React.createClass({
+				render:function(){
+					return (
+						<div className="container">
+							<h2>学员信息表</h2>	
+							<div className="bs-example">
+								<div className="form-group">
+									<label>按名字查训</label>
+									<input type="text" className="form-control" onKeyUp={this.getName} ref="ipt"/>
+								</div>
+								<div className="form-group">
+									<label>按性别查训</label>
+									<select name="" className="form-control" onChange={this.getSex} ref="gender">
+										<option value="all">all</option>
+										<option value="1">男</option>
+										<option value="0">女</option>
+									</select>
+								</div>
+								<Tabel data={this.state.initData} sex={this.state.setSex} name={this.state.setName}/>
+							</div>
+							
+						</div>
+					)
+				},
+				getInitialState:function(){
+					return ({
+						initData:this.props.data,
+						setSex:'all',
+						setName:''
+					})
+				},
+				getSex:function(){
+					let gender = this.refs.gender.value;
+					
+					this.setState({
+						setSex:gender
+					})
+					
+				},
+				getName:function(){
+					let name = this.refs.ipt.value;
+					this.setState({
+						setName:name
+					})
+				},
+				componentDidMount:function(){
+					//let that = this;
+					PubSub.subscribe("deletItem",function(fnNmae,_id){
+						let arr = [];
+						
+						arr = this.state.initData.filter(function(item,index){
+							return item._id != _id;
+						})
+						
+						this.setState({
+							initData:arr
+						})
+					}.bind(this))
+				}
+				
+			})
+			
+			
+			ReactDOM.render(
+				<Main data={listArr}/>,
+				document.getElementById('box')
+			)
+		</script>
+	</body>
+</html>
