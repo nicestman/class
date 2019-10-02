@@ -1,0 +1,2 @@
+const AGORA_APP_ID = 'e51dfc18fe9447fe990400029940efb1'
+const AGORA_CERTIFICATE_ID = ''

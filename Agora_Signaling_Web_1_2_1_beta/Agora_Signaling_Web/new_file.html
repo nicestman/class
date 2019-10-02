@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title> 测试视频播放</title>
+		<meta charset="utf-8"> </head>
+	<body>
+		<object id="MediaPlayer" classid="clsid:22D6F312-B0F6-11D0-94AB-0080C74C7E95" width="800" height="600" standby="Loading Windows Media Player components…" type="application/x-oleobject" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112">
+			<param name="FileName" value="https://imuts.oss-cn-shenzhen.aliyuncs.com/img/training/%E6%80%A5%E6%80%A7%E8%84%91%E6%A2%97%E6%AD%BB%E6%A1%A5%E6%8E%A5%E6%B2%BB%E7%96%97--%E6%AC%A7%E9%98%B3%E5%BE%81.wmv">
+			<param name="AutoStart" value="true">
+			<param name="ShowControls" value="true">
+			<param name="BufferingTime" value="2">
+			<param name="ShowStatusBar" value="true">
+			<param name="AutoSize" value="true">
+			<param name="InvokeURLs" value="false">
+			<param name="AnimationatStart" value="1">
+			<param name="TransparentatStart" value="1">
+			<param name="Loop" value="1">
+			<embed type="application/x-mplayer2" src="https://imuts.oss-cn-shenzhen.aliyuncs.com/img/training/%E6%80%A5%E6%80%A7%E8%84%91%E6%A2%97%E6%AD%BB%E6%A1%A5%E6%8E%A5%E6%B2%BB%E7%96%97--%E6%AC%A7%E9%98%B3%E5%BE%81.wmv" name="MediaPlayer" autostart="1" showstatusbar="1" showdisplay="1" showcontrols="1" loop="0" videoborder3d="0" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" width="800" height="600"></embed>
+		</object>
+		<video width="800" height="" controls preload="auto">
+			<source src="http://imuts.oss-cn-shenzhen.aliyuncs.com/img/training/jq.mp4" type="video/mp4"></source>
+			<object width="" height="" type="application/x-shockwave-flash" data="myvideo.swf">
+				<param name="movie" value="myvideo.swf" />
+				<param name="flashvars" value="autostart=true&amp;file=myvideo.swf" />
+			</object>
+			当前浏览器不支持 video直接播放，点击这里下载视频： <a href="jq.MP4">下载视频</a>
+		</video>
+	</body>
+</html>
