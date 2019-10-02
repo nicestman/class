@@ -1,0 +1,75 @@
+
+<textarea name="" rows="" cols="">
+	<tr>
+		<td>$i.index$</td>
+		<td>$list.conId$</td>
+		<td>$list.patientName$</td>
+		<!-- <td>陈XX</td> -->
+		<td>${list.groupType$</td>
+		<!-- <td>牙科</td> -->
+		<td>$list.groupDate$</td>
+		<td>$list.time$</td>
+		<td>$list.initial$</td>
+		<td>$list.groupHospital$</td>
+		<td>$list.statu$</td>
+		<td><a href="${ ctx}/consu/borderDetail?conId=$list.conId$">xinxi</a></td>
+	</tr>
+</textarea>
+
+<textarea name="" rows="" cols="">
+	<tr>
+		<td>${i.index+1}</td>
+		<td>${list.conId}</td>
+		<td>${list.patientName }</td>
+		<!-- <td>陈XX</td> -->
+		<td>${list.groupType }</td>
+		<!-- <td>牙科</td> -->
+		<td>${list.groupDate }</td>
+		<td>12:00:00</td>
+		<td>${list.initial }</td>
+		<td>${list.groupHospital }</td>
+		<td>
+			<c:choose>
+				<c:when test="${list.statu eq 1}">
+				     	  待分配专家
+				</c:when>
+				<c:when test="${list.statu eq 2}">
+				 	 已分配专家
+				</c:when>
+				<c:otherwise>
+				      已完成
+				</c:otherwise>
+			</c:choose>
+		</td>
+		<td><a href="${ ctx}/consu/borderDetail?conId=${list.conId}">信息修改</a></td>
+	</tr>
+</textarea>
+
+<textarea name="" rows="" cols="">
+	<tr>
+		<td>${i.index+1}</td>
+		<td>${list.conId}</td>
+		<td>${list.patientName }</td>
+		<!-- <td>陈XX</td> -->
+		<td>${list.groupType }</td>
+		<!-- <td>牙科</td> -->
+		<td>${list.groupDate }</td>
+		<td>12:00:00</td>
+		<td>${list.initial }</td>
+		<td>${list.groupHospital }</td>
+		<td>
+			<c:choose>
+				<c:when test="${list.statu eq 1}">
+				     	  待分配专家
+				</c:when>
+				<c:when test="${list.statu eq 2}">
+				 	 已分配专家
+				</c:when>
+				<c:otherwise>
+				      已完成
+				</c:otherwise>
+			</c:choose>
+		</td>
+		<td><a href="${ ctx}/consu/borderDetail?conId=${list.conId}">信息修改</a></td>
+	</tr>
+</textarea>
