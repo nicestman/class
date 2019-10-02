@@ -1,0 +1,10 @@
+
+language: node_js
+node_js: "6.4"
+services:
+  - mongodb
+  - redis
+script:
+  - npm install babel --save
+  - npm install
+  - npm run build

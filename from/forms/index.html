@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>检验报告单</title>
+		<link rel="stylesheet" type="text/css" href="css/form.css"/>
+		<script src="js/form.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="wrap">
+			<div id="shenghua">
+				<div class="shenghua itmeAll">
+					<div class="title">
+						<h2>生化检验报告单</h2>
+					</div>
+					<div class="patient_info">
+						<ul class="clearfix">
+							<li class="clearfix">
+								<label for="name">姓&emsp;&emsp;名：</label>
+								<input type="text" id="name"/>
+								<input type="text" id="name"/>
+							</li>
+							<li class="clearfix">
+								<label for="sex">性&emsp;&emsp;别：</label>
+								<input type="text" id="sex" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="age">年&emsp;&emsp;龄：</label>
+								<input type="text" id="age" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="mzh">门&ensp;诊&ensp;号：</label>
+								<input type="text" id="mzh" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="zyh">住&ensp;院&ensp;号：</label>
+								<input type="text" id="zyh" value="" />
+							</li>
+						</ul>
+						<ul class="clearfix">
+							<li class="clearfix">
+								<label for="sjks">送检科室：</label>
+								<input type="text" id="sjks" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="ch">床&emsp;&emsp;号：</label>
+								<input type="text" id="ch" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="bblx">标本类型：</label>
+								<input type="text" id="bblx" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="bbzt">标本状态：</label>
+								<input type="text" id="bbzt" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="ybh">样&ensp;本&ensp;号：</label>
+								<input type="text" id="ybh" value="" />
+							</li>
+						</ul>
+						<ul class="clearfix">
+							<li class="clearfix">
+								<label for="time">送检日期：</label>
+								<input type="text" id="time" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="lczd">临床诊断：</label>
+								<input type="text" id="lczd" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="comment">备&emsp;&emsp;注：</label>
+								<input type="text" id="comment" value="" />
+							</li>
+						</ul>
+					</div>
+					<div class="inspection_result">
+						<table cellspacing="" cellpadding="">
+							<thead>
+								<tr>
+									<th>项目名称</th>
+									<th>英文简称</th>
+									<th>结果</th>
+									<th>单位</th>
+									<th>提示</th>
+									<th>参考值范围</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><p>谷丙转氨酶</p></td>
+									<td><p>ALT</p></td>
+									<td><p>11.3</p></td>
+									<td><p>U/L</p></td>
+									<td><p></p></td>
+									<td><p>0-40</p></td>
+								</tr>
+								<tr>
+									<td><p>谷草转氨酶</p></td>
+									<td><p>ASL</p></td>
+									<td><p>16.5</p></td>
+									<td><p>U/L</p></td>
+									<td><p></p></td>
+									<td><p>8-40</p></td>
+								</tr>
+								<tr>
+									<td><p>谷草/谷丙比值</p></td>
+									<td><p>ASL/ALT</p></td>
+									<td><p>1.5</p></td>
+									<td><p></p></td>
+									<td><p></p></td>
+									<td><p>0.8-1.5</p></td>
+								</tr>
+								<tr>
+									<td><p>总胆红素</p></td>
+									<td><p>TBLL</p></td>
+									<td><p>8.4</p></td>
+									<td><p>umol/l</p></td>
+									<td><p></p></td>
+									<td><p>3.4-20.5</p></td>
+								</tr>
+								<tr>
+									<td><p>直接胆红素</p></td>
+									<td><p>DBLL</p></td>
+									<td><p>3.7</p></td>
+									<td><p>umol/l</p></td>
+									<td><p></p></td>
+									<td><p>0-6.8</p></td>
+								</tr>
+								<tr>
+									<td><p>总蛋白</p></td>
+									<td><p>TP</p></td>
+									<td><p>67.2</p></td>
+									<td><p>g/l</p></td>
+									<td><p></p></td>
+									<td><p>60-83</p></td>
+								</tr>
+								<tr>
+									<td><p>白蛋白</p></td>
+									<td><p>ALB</p></td>
+									<td><p>46.6</p></td>
+									<td><p>g/l</p></td>
+									<td><p></p></td>
+									<td><p>35-55</p></td>
+								</tr>
+								<tr>
+									<td><p>球蛋白</p></td>
+									<td><p>GLO</p></td>
+									<td><p>20.6</p></td>
+									<td><p>g/l</p></td>
+									<td><p></p></td>
+									<td><p>20-30</p></td>
+								</tr>
+								<tr>
+									<td><p>白球比值</p></td>
+									<td><p>A/G</p></td>
+									<td><p>2.26</p></td>
+									<td><p></p></td>
+									<td><p></p></td>
+									<td><p>1.3-2.5</p></td>
+								</tr>
+								<tr>
+									<td><p>尿素</p></td>
+									<td><p>Urea</p></td>
+									<td><p>4.78</p></td>
+									<td><p>mmol/l</p></td>
+									<td><p></p></td>
+									<td><p>2.50-6.4</p></td>
+								</tr>
+								<tr>
+									<td><p>尿酸</p></td>
+									<td><p>UA(S)</p></td>
+									<td><p>236</p></td>
+									<td><p>umol/l</p></td>
+									<td><p></p></td>
+									<td><p>155-428</p></td>
+								</tr>
+								<tr>
+									<td><p>肌酐</p></td>
+									<td><p>CRE</p></td>
+									<td><p>49.4</p></td>
+									<td><p>umol/l</p></td>
+									<td><p></p></td>
+									<td><p>50-120</p></td>
+								</tr>
+								<tr>
+									<td><p>葡萄糖</p></td>
+									<td><p>GLU(S)</p></td>
+									<td><p>3.99</p></td>
+									<td><p>mmol/l</p></td>
+									<td><p></p></td>
+									<td><p>3.90-6.10</p></td>
+								</tr>
+								<tr>
+									<td><p>甘油三酯</p></td>
+									<td><p>TG(S)</p></td>
+									<td><p>1.19</p></td>
+									<td><p>mmol/l</p></td>
+									<td><p></p></td>
+									<td><p>0.70-1.70</p></td>
+								</tr>
+								<tr>
+									<td><p>总胆固醇</p></td>
+									<td><p>TC(S)</p></td>
+									<td><p>1.76</p></td>
+									<td><p>mmol/l</p></td>
+									<td><p></p></td>
+									<td><p>2.33-6.20</p></td>
+								</tr>
+								<tr>
+									<td><p>高密度脂蛋白胆固醇</p></td>
+									<td><p>HDL-C</p></td>
+									<td><p>1.38</p></td>
+									<td><p>mmol/l</p></td>
+									<td><p></p></td>
+									<td><p>0.91-2.00</p></td>
+								</tr>
+								<tr>
+									<td><p>低密度脂蛋白胆固醇</p></td>
+									<td><p>LDL-C</p></td>
+									<td><p>2.39</p></td>
+									<td><p>mmol/l</p></td>
+									<td><p></p></td>
+									<td><p>0.50-3.36</p></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="other_info">
+						<dl class="clearfix">
+							<dd>
+								<label for="sjys">送检医师：</label>
+								<input type="text" id="sjys" value="" />
+							</dd>
+							<dd>
+								<label for="jys">检验师：</label>
+								<input type="text" id="jys" value="" />
+							</dd>
+							<dd>
+								<label for="shz">审核者：</label>
+								<input type="text" id="shz" value="" />
+							</dd>
+							<dd>
+								<label for="report_time">报告时间：</label>
+								<input type="text" id="report_time" value="" />
+							</dd>
+							<dd>
+								<p>第<span id="pg">1</span>&frasl;<span id="pg">1</span>页</p>
+							</dd>
+						</dl>
+						<p>此结果仅对该标本负责，如有疑问，请在三天内提出，以便复查！</p>
+					</div>
+				</div>
+			</div>
+			<button>提交确认</button>
+			<div id="xuechanggui">
+				<div class="xuechanggui itmeAll">
+					<div class="title">
+						<h2>血常规检验报告</h2>
+						<p>标本号：<span>1</span></p>
+					</div>
+					<div class="patient_info">
+						<ul class="clearfix">
+							<li class="clearfix">
+								<label for="name">姓&emsp;&emsp;名：</label>
+								<input type="text" id="name" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="brlx">病人类型：</label>
+								<input type="text" id="brlx" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="ch">床&emsp;&emsp;号：</label>
+								<input type="text" id="ch" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="time">检验日期：</label>
+								<input type="text" id="time" value="" />
+							</li>
+						</ul>
+						<ul class="clearfix">
+							<li class="clearfix">
+								<label for="sex">性&emsp;&emsp;别：</label>
+								<input type="text" id="sex" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="mzh">住&ensp;院&ensp;号：</label>
+								<input type="text" id="zyh" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="sjks">费&emsp;&emsp;别：</label>
+								<input type="text" id="sjks" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="bblx">标本类型：</label>
+								<input type="text" id="bblx" class="text_info" value="" />
+							</li>
+						</ul>
+						<ul class="clearfix">
+							<li class="clearfix">
+								<label for="age">年&emsp;&emsp;龄：</label>
+								<input type="text" id="age" class="text_info" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="lczd">科&emsp;&emsp;室：</label>
+								<input type="text" id="lczd" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="ybh">诊&emsp;&emsp;断：</label>
+								<input type="text" id="ybh" value="" />
+							</li>
+							<li class="clearfix">
+								<label for="comment">备&emsp;&emsp;注：</label>
+								<input type="text" id="comment" value="" />
+							</li>
+						</ul>
+					</div>
+					<div class="inspection_result clearfix">
+						<table cellspacing="" cellpadding="" class="table1">
+							<thead>
+								<tr>
+									<th>代号</th>
+									<th>项目</th>
+									<th>结果</th>
+									<th>单位</th>
+									<th>参考值</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><p>WBC</p></td>
+									<td><p>白细胞</p></td>
+									<td><p>5.3</p></td>
+									<td><p>10^9/L</p></td>
+									<td><p>4-10</p></td>
+								</tr>
+								<tr>
+									<td><p>RBC</p></td>
+									<td><p>红细胞</p></td>
+									<td><p>4.76</p></td>
+									<td><p>10^12/L</p></td>
+									<td><p>3.5-5.5</p></td>
+								</tr>
+								<tr>
+									<td><p>HGB</p></td>
+									<td><p>血红蛋白</p></td>
+									<td><p>155</p></td>
+									<td><p>g/l</p></td>
+									<td><p>110-160</p></td>
+								</tr>
+								<tr>
+									<td><p>HCT</p></td>
+									<td><p>红细胞压积</p></td>
+									<td><p>45.3</p></td>
+									<td><p>%</p></td>
+									<td><p>36-50</p></td>
+								</tr>
+								<tr>
+									<td><p>MCY</p></td>
+									<td><p>红细胞平均体积</p></td>
+									<td><p>91.6</p></td>
+									<td><p>fL</p></td>
+									<td><p>82-100</p></td>
+								</tr>
+								<tr>
+									<td><p>MCH</p></td>
+									<td><p>平均血红蛋白量</p></td>
+									<td><p>29.3</p></td>
+									<td><p>pg</p></td>
+									<td><p>26-32</p></td>
+								</tr>
+								<tr>
+									<td><p>MCHC</p></td>
+									<td><p>平均血红蛋白浓度</p></td>
+									<td><p>336</p></td>
+									<td><p>g/l</p></td>
+									<td><p>320-360</p></td>
+								</tr>
+								<tr>
+									<td><p>PLT</p></td>
+									<td><p>血小板</p></td>
+									<td><p>264</p></td>
+									<td><p>10^9/L</p></td>
+									<td><p>100-300</p></td>
+								</tr>
+								<tr>
+									<td><p>LYMPHP</p></td>
+									<td><p>淋巴细胞比率</p></td>
+									<td><p>33.5</p></td>
+									<td><p>%</p></td>
+									<td><p>20-40</p></td>
+								</tr>
+								<tr>
+									<td><p>NEUTP</p></td>
+									<td><p>中性细胞比率</p></td>
+									<td><p>59.6</p></td>
+									<td><p>%</p></td>
+									<td><p>50-70</p></td>
+								</tr>
+								<tr>
+									<td><p>MONOP</p></td>
+									<td><p>单核细胞比率</p></td>
+									<td><p>6.3</p></td>
+									<td><p>%</p></td>
+									<td><p>3-8</p></td>
+								</tr>
+								<tr>
+									<td><p>EOP</p></td>
+									<td><p>嗜酸性粒细胞比率</p></td>
+									<td><p>3.2</p></td>
+									<td><p>%</p></td>
+									<td><p>0.5-5</p></td>
+								</tr>
+								<tr>
+									<td><p>BASOP</p></td>
+									<td><p>嗜碱性粒细胞比率</p></td>
+									<td><p>0.1</p></td>
+									<td><p>%</p></td>
+									<td><p>0-1</p></td>
+								</tr>
+								<tr>
+									<td><p>LYMPHN</p></td>
+									<td><p>淋巴细胞数</p></td>
+									<td><p>2.66</p></td>
+									<td><p>10^9/L</p></td>
+									<td><p>0.8-4</p></td>
+								</tr>
+								<tr>
+									<td><p>NEUT</p></td>
+									<td><p>中性细胞数</p></td>
+									<td><p>4.19</p></td>
+									<td><p></p></td>
+									<td><p></p></td>
+								</tr>
+								<tr>
+									<td><p>MONON</p></td>
+									<td><p>单核细胞</p></td>
+									<td><p>0.67</p></td>
+									<td><p>10^9/L</p></td>
+									<td><p>0-0.8</p></td>
+								</tr>
+								<tr>
+									<td><p>EON</p></td>
+									<td><p>嗜酸性粒细胞</p></td>
+									<td><p>0.11</p></td>
+									<td><p>10^9/L</p></td>
+									<td><p>0.05-0.5</p></td>
+								</tr>
+								<tr>
+									<td><p>BASON</p></td>
+									<td><p>嗜碱性粒细胞</p></td>
+									<td><p>0.01</p></td>
+									<td><p>10^9/L</p></td>
+									<td><p>0-0.1</p></td>
+								</tr>
+							</tbody>
+						</table>
+						<table cellspacing="" cellpadding="" class="table2">
+							<thead>
+								<tr>
+									<th>代号</th>
+									<th>项目</th>
+									<th>结果</th>
+									<th>单位</th>
+									<th>参考值</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><p>RDW-CV</p></td>
+									<td><p>红细胞分布宽度</p></td>
+									<td><p>-DY.6</p></td>
+									<td><p>10^9/L</p></td>
+									<td><p>10.9-15.4</p></td>
+								</tr>
+								<tr>
+									<td><p>RDW-SD</p></td>
+									<td><p>红细胞分布宽度</p></td>
+									<td><p>-39.3</p></td>
+									<td><p>%</p></td>
+									<td><p>37-54</p></td>
+								</tr>
+								<tr>
+									<td><p>PDW</p></td>
+									<td><p>血小板分布宽度</p></td>
+									<td><p>10.1</p></td>
+									<td><p>fL</p></td>
+									<td><p>9-17</p></td>
+								</tr>
+								<tr>
+									<td><p>MPV</p></td>
+									<td><p>平均血小板体积</p></td>
+									<td><p>9.1</p></td>
+									<td><p>fL</p></td>
+									<td><p>9-13</p></td>
+								</tr>
+								<tr>
+									<td><p>PCT</p></td>
+									<td><p>血小板压积</p></td>
+									<td><p>0.2</p></td>
+									<td><p>%</p></td>
+									<td><p>0.17-0.35</p></td>
+								</tr>
+								<tr>
+									<td><p>P-LCR</p></td>
+									<td><p>大型血小板比率</p></td>
+									<td><p>19.1</p></td>
+									<td><p>%</p></td>
+									<td><p>13-43</p></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="other_info">
+						<dl class="clearfix">
+							<dd>
+								<label for="sjys">送检医生：</label>
+								<input type="text" id="sjys" value="" />
+							</dd>
+							<dd>
+								<label for="sjtime">送检日期：</label>
+								<input type="text" id="sjtime" value="" />
+							</dd>
+							<dd>
+								<label for="report_time">报告日期：</label>
+								<input type="text" id="report_time" value="" />
+							</dd>
+							<dd>
+								<label for="jyy">检验员：</label>
+								<input type="text" id="jyy" value="" />
+							</dd>
+							<dd>
+								<label for="fhy">复核员：</label>
+								<input type="text" id="fhy" value="" />
+							</dd>
+						</dl>
+						<p>此结果仅对本样品负责！</p>
+					</div>
+				</div>
+			</div>
+			<button>提交确认</button>
+		</div>
+	</body>
+</html>

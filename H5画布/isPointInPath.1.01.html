@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			html,body{
+				height: 100%;
+			}
+			canvas{
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: block;
+				width: 100%;
+				height: 100%;
+				/*background-color: #544597;*/
+				border: 1px solid #000000;
+			}
+			#canvas1{
+				background-image: url(img/bgi.png);
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas1"></canvas>
+		<canvas id="canvas2"></canvas>
+		<!--<script src="js/isPointInPath.1.0.1.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="module">
+			import Labels from "./js/isPointInPath.1.0.1.js"
+			let canvasRect = canvas1.getBoundingClientRect()
+			canvas1.width = canvasRect.width
+			canvas1.height = canvasRect.height
+			canvasRect = canvas2.getBoundingClientRect()
+			canvas2.width = canvasRect.width
+			canvas2.height = canvasRect.height
+			let labels = new Labels(canvas1, canvas2)
+			console.log(labels)
+			document.body.onmousedown = function (e) {
+				let isChecked = labels.checkSelected(e.pageX, e.pageY)
+				console.log(isChecked)
+				console.log(labels.drawObjs[0]&&labels.drawObjs[0].dragPosition)
+				if (!isChecked) {
+					labels.rect(e.pageX, e.pageY)
+					labels.drawObjs[0].isDrag = true
+					labels.drawObjs[0].dragPosition = 'bottomRight'
+					labels.drawRender()
+					labels.saveRender()
+				}
+			}
+			document.body.onmousemove = function (e) {
+				let drawObj = labels.drawObjs[0] || {}
+				let isMove = drawObj.isMove || false
+				let isDrag = drawObj.isDrag || false
+				if (isMove) {
+					labels.move(e.pageX, e.pageY)
+					return false
+				}
+				if (isDrag) {
+					drawObj.drag(e.pageX, e.pageY)
+					labels.drawRender()
+					return false
+				}
+			}
+			document.body.onmouseup = function (e) {
+				let drawObj = labels.drawObjs[0]
+				if (drawObj) {
+					drawObj.isDrag = false
+					drawObj.dragPosition = ''
+					drawObj.isMove = false
+				}
+				
+			}
+		</script>
+	</body>
+</html>

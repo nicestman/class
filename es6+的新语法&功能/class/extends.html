@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body> </body>
+	<script type="text/javascript">
+		/*class A{
+					constructor(val) {
+						this.name = val || 'xxx'
+					}
+					b() {
+						return new class extends A {
+							constructor(val) {
+								super()
+							}
+							updateName(val) {
+								this.name = val
+								return this
+							}
+						}
+					}
+				}
+				var b = new A()*/
+		let b
+		class A {
+			constructor(val) {
+				this.name = val || 'xxx'
+				console.log(b)
+			}
+			b() {
+				console.log(c)
+				return b
+			}
+		}
+		let a = new A('aaa')
+		let c = 1
+		 b = new class B extends A {
+			constructor(val) {
+				super()
+			}
+			updateName(val) {
+				super.name = val
+				return this
+			}
+		}
+		console.log(a)
+		console.log(a.b())
+		console.log(b)
+		console.log(b.name)
+		console.log(b.b())
+		console.log(b.updateName('asdf'))
+		
+		class Foo {
+			constructor(...args) {
+				this.args = args;
+			}
+			*[Symbol.iterator]() {
+				for(let arg of this.args) {
+					yield arg;
+				}
+			}
+		}
+		console.log(new Foo('hello', 'world'))
+		for(let x of new Foo('hello', 'world')) {
+			console.log(x);
+		}
+	</script>
+</html>

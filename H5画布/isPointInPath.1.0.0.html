@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			html,body{
+				height: 100%;
+			}
+			canvas{
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: block;
+				width: 100%;
+				height: 100%;
+				/*background-color: #544597;*/
+				background-image: url(img/bgi.png);
+				border: 1px solid #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+	</body>
+	<script type="text/javascript">
+		// canvas 矩形框集合
+		var rects = [];
+
+		function rectar(x, y, width, height) {
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+			this.centerX = this.x + this.width / 2
+			this.centerY = this.y + this.height / 2
+			this.rightX = this.x + this.width
+			this.bottomY = this.y + this.height
+			this.isSelected = false;
+			this.setXY = function(x, y) {
+				var setXYEvent = new Event("setXYEvent");
+				setXYEvent.x = x;
+				setXYEvent.y = y;
+				!isNaN(x) ? (this.x = x) : false;
+				!isNaN(y) ? (this.y = y) : false;
+				window.dispatchEvent(setXYEvent);
+			}
+			this.setWH = function(width, height) {
+				var setWHEvent = new Event("setWHEvent");
+				setWHEvent.width = width;
+				setWHEvent.height = height;
+				!isNaN(width) ? (this.width = width) : false;
+				!isNaN(height) ? (this.height = height) : false;
+				window.dispatchEvent(setWHEvent);
+			}
+			var self = this
+			window.addEventListener("setXYEvent", handleEvent);
+			window.addEventListener("setWHEvent", handleEvent);
+			function handleEvent(e) {
+				self.centerX = self.x + self.width / 2
+				self.centerY = self.y + self.height / 2
+				self.rightX = self.x + self.width
+				self.bottomY = self.y + self.height
+			}
+		}
+
+		function drawRect() {
+			// 清除画布，准备绘制
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			// 遍历所有矩形框
+			for(var i = 0; i < rects.length; i++) {
+				var rect = rects[i];
+				// 绘制矩形
+				context.strokeStyle = "#0000ff";
+				if(rect.isSelected) {
+					// context.lineWidth = 5;
+				} else {
+					context.lineWidth = 2;
+				}
+				console.log(rect.centerX, rect.centerY)
+				context.beginPath();
+				context.strokeRect(rect.x, rect.y, rect.width, rect.height, rect.color);
+				context.closePath();
+				var r1 = 5;
+				var r2 = 7;
+				drawPoint(rect.centerX, rect.centerY, 8, 10)
+				drawPoint(rect.x, rect.y, r1, r2)
+				drawPoint(rect.x, rect.centerY, r1, r2)
+				drawPoint(rect.x, rect.y + rect.height, r1, r2)
+				drawPoint(rect.centerX, rect.y, r1, r2)
+				drawPoint(rect.centerX, rect.y + rect.height, r1, r2)
+				drawPoint(rect.x + rect.width, rect.y, r1, r2)
+				drawPoint(rect.x + rect.width, rect.centerY, r1, r2)
+				drawPoint(rect.x + rect.width, rect.y + rect.height, r1, r2)
+			}
+		}
+		function drawPoint(x, y, r1, r2) {
+			context.beginPath();
+			var grd = context.createRadialGradient(x, y, 0,x, y, r1);
+			grd.addColorStop(1, 'rgba(0, 0, 0, 1)');
+			context.strokeStyle = grd;
+			context.arc(x, y, r1, 0, 2 * Math.PI);
+			context.stroke();
+			context.closePath();
+			// 小圆圈的遮罩层
+			context.beginPath();
+			grd = context.createRadialGradient(x, y, 0,x, y, r2);
+			grd.addColorStop(0, 'rgba(255, 255, 255, 0.7)');
+			grd.addColorStop(0.5, 'rgba(255, 255, 255, 0.6)');
+			grd.addColorStop(1, 'rgba(255, 255, 255, 0.1)');
+			context.fillStyle = grd;
+			context.arc(x, y, r2, 0, 2 * Math.PI);
+			context.fill();
+			context.closePath();
+		}
+		function addRandomRect(e) {
+			var x = e.pageX - canvas.offsetLeft;
+			var y = e.pageY - canvas.offsetTop;
+			var width = 0;
+			var height = 0;
+			// 创建一个新的矩形对象
+			var rect = new rectar(x, y, width, height);
+			// 把它保存在数组中
+			rects.push(rect);
+			// 重新绘制画布
+			drawRect();
+			canvasClick(e)
+			canvas.onmousedown = canvasClick;
+		}
+		
+		var SelectedRect;
+		var SelectedSmallCircles;
+		var x1;
+		var y1;
+		var right = false;
+		var widthstart, widthend;
+		var heightstart, heightend;
+
+		function canvasClick(e) {
+			// 清除之前选择的矩形框
+			if(SelectedRect != null) SelectedRect.isSelected = false;
+			// 取得画布上被单击的点
+			var clickX = e.pageX - canvas.offsetLeft;
+			var clickY = e.pageY - canvas.offsetTop;
+			
+			// 查找被单击的矩形框
+			for(var i = rects.length - 1; i >= 0; i--) {
+				var rect = rects[i];
+				/*widthstart = rect.x;
+				widthend = rect.x + rect.width;
+				heightstart = rect.y;
+				heightend = rect.y + rect.height;*/
+				
+				/*
+				  设置拉伸的界限。
+				  */
+				// if ((clickX>=(widthend-20))&&(clickY>=(heightend-20)))
+				// {
+				//   SelectedRect = rect;
+				//  right=true;
+				//  }
+				//18-02-01改
+				SelectedSmallCircles = isSelectCircleInRect (clickX, clickY, rect, 7);
+				console.log(SelectedSmallCircles)
+				if(!!SelectedSmallCircles) {
+					SelectedRect = rect;
+					right = true;
+					return;
+				} else {
+					SelectedRect = null;
+					right = false;
+				}
+					
+				// 判断这个点是否在矩形框中心的小圆圈上
+				var diffX = clickX - rect.centerX;
+				var diffY = clickY - rect.centerY;
+				// if((clickX >= widthstart && clickX <= (widthend + 10)) && (clickY >= heightstart) && (clickY <= (heightend + 10))) {
+				if(isPointInCircle(diffX, diffY, 10)) {
+					console.log(clickX);
+					SelectedRect = rect;
+					x1 = clickX - SelectedRect.x;
+					y1 = clickY - SelectedRect.y;
+					//选择新圆圈
+					rect.isSelected = true;
+					// 使圆圈允许拖拽
+					isDragging = true;
+					//更新显示
+					drawRect();
+					//停止搜索
+					return;
+				} else {
+					console.log(clickX);
+					SelectedRect = rect;
+					// 使圆圈允许拖拽
+					isDragging = false;
+					//更新显示
+					drawRect();
+				};
+			}
+		}
+		function isSelectCircleInRect (clickX, clickY, rect, r) {
+			// 判断鼠标的点是否在选择的矩形框的小圆圈上, 是则返回所在的位置，否返回空字符串
+			var circles = [];
+			var sPosition = '';
+			circles.push({name: "topLift",isSelected: isPointInCircle(clickX - rect.x, clickY - rect.y, r)});
+			circles.push({name: "topCenter",isSelected: isPointInCircle(clickX - rect.centerX, clickY - rect.y, r)});
+			circles.push({name: "topRight",isSelected: isPointInCircle(clickX - rect.rightX, clickY - rect.y, r)});
+			circles.push({name: "middleLift",isSelected: isPointInCircle(clickX - rect.x, clickY - rect.centerY, r)});
+			circles.push({name: "middleRight",isSelected: isPointInCircle(clickX - rect.rightX, clickY - rect.centerY, r)});
+			circles.push({name: "bottomLift",isSelected: isPointInCircle(clickX - rect.x, clickY - rect.bottomY, r)});
+			circles.push({name: "bottomCenter",isSelected: isPointInCircle(clickX - rect.centerX, clickY - rect.bottomY, r)});
+			circles.push({name: "bottomRight",isSelected: isPointInCircle(clickX - rect.rightX, clickY - rect.bottomY, r)});
+			circles.forEach(item => {
+				if (item.isSelected) {
+					sPosition = item.name;
+					return false;
+				}
+			})
+			return sPosition;
+		}
+		
+		function isPointInCircle(diffX, diffY, r) {
+			return ((diffX * diffX) + (diffY * diffY)) <= r * r;
+		}
+
+		function dragRect(e) {
+			// 判断拖拽对象是否存在
+			if(SelectedRect != null) {
+				// 判断矩形是否开始拖拽
+				if(isDragging == true) {
+					// 取得鼠标位置
+					var x = e.pageX - canvas.offsetLeft;
+					var y = e.pageY - canvas.offsetTop;
+					// 将圆圈移动到鼠标位置
+					// SelectedRect.x = x - x1;
+					// SelectedRect.y = y - y1;
+					SelectedRect.setXY(x - x1, y - y1)
+					// 更新画布
+					drawRect();
+				}
+				// 判断是否开始拉伸
+				if(right == true && !!SelectedSmallCircles) {
+					// 设置拉伸最小的边界
+					/*if((e.pageX - canvas.offsetLeft - SelectedRect.x)) {
+						 SelectedRect.width = e.pageX - canvas.offsetLeft - SelectedRect.x;
+					}
+					console.log(SelectedRect.width);
+					if((e.pageY - canvas.offsetTop - SelectedRect.y)) {
+						 SelectedRect.height = e.pageY - canvas.offsetTop - SelectedRect.y;
+					}*/
+					console.log(SelectedSmallCircles)
+					var x = SelectedRect.x;
+					var y = SelectedRect.y;
+					var width = e.pageX - canvas.offsetLeft - SelectedRect.x;
+					var height = e.pageY - canvas.offsetTop - SelectedRect.y;
+					switch (SelectedSmallCircles){
+						case 'topLift':
+							x = e.pageX - canvas.offsetLeft
+							y = e.pageY - canvas.offsetTop
+							width = SelectedRect.x - x + SelectedRect.width;
+							height = SelectedRect.y - y + SelectedRect.height;
+							SelectedRect.setXY(x, y)
+							SelectedRect.setWH(width, height)
+							break;
+						case 'topCenter':
+							y = e.pageY - canvas.offsetTop
+							height = SelectedRect.y - y + SelectedRect.height;
+							SelectedRect.setXY(x, y)
+							SelectedRect.setWH(SelectedRect.width, height)
+							break;
+						case 'topRight':
+							y = e.pageY - canvas.offsetTop
+							height = SelectedRect.y - y + SelectedRect.height;
+							SelectedRect.setXY(x, y)
+							SelectedRect.setWH(width, height)
+							break;
+						case 'middleLift':
+							x = e.pageX - canvas.offsetLeft
+							width = SelectedRect.x - x + SelectedRect.width;
+							SelectedRect.setXY(x, y)
+							SelectedRect.setWH(width, SelectedRect.height)
+							break;
+						case 'middleRight':
+							SelectedRect.setWH(width, SelectedRect.height)
+							break;
+						case 'bottomLift':
+							x = e.pageX - canvas.offsetLeft
+							width = SelectedRect.x - x + SelectedRect.width;
+							SelectedRect.setXY(x, y)
+							SelectedRect.setWH(width, height)
+							break;
+						case 'bottomCenter':
+						console.log(height)
+							SelectedRect.setWH(SelectedRect.width, height)
+							break;
+						case 'bottomRight':
+							SelectedRect.setWH(width, height)
+							break;
+						default:
+							console.log('未选中矩形框上的小圆圈')
+							break;
+					}
+					drawRect();
+				}
+			}
+		};
+		
+		var isDragging = false;
+
+		function stopDragging() {
+			isDragging = false;
+			right = false;
+			// canvas.onmousedown = addRandomRect;
+		}
+		function clearCanvas() {
+			// 去除所有矩形
+			rects = [];
+			// 重新绘制画布.
+			drawCircles();
+		}
+		window.onload = function() {
+			canvas = document.getElementById("canvas");
+			context = canvas.getContext("2d");
+			canvasRect = canvas.getBoundingClientRect()
+			canvas.width = canvasRect.width
+			canvas.height = canvasRect.height
+			canvas.onmousedown = addRandomRect;
+			canvas.onmouseup = stopDragging;
+			canvas.onmouseout = stopDragging;
+			canvas.onmousemove = dragRect;
+		};
+	</script>
+</html>

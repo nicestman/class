@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>打印报告单</title>
+		<link rel="stylesheet" type="text/css" href="css/form.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<script language="javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script language="javascript" src="js/jquery.jqprint-0.3.js"></script>
+		<style type="text/css">
+			.ddd {
+				width: 100%;
+				height: 100%;
+				/*page-break-after: always;*/
+			}
+			.ddd table{
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<!--<select name='dog' id='dog'>
+			<optgroup label='bigDogs'>
+				<option id='lab' label='lab' value='lab'> Labrador retriever </option>
+				<option id='golden' label='golden' value='golden'> Golden retriever </option>
+			</optgroup>
+			<option id='pug' label='pug' value='pug'> Pug </option>
+		</select>-->
+		<div> <input type="text" id="" value="" /> <input type="button" id="" value="确定" /> </div>
+		<div id="ddd" class="aaa ddd">
+			<table id="table" class="table public-table ccc"></table>
+		</div> <button class="btn print">打印</button>
+		<script language="javascript">
+			$.ajax({
+				type: "get",
+				url: "loadHTML.html",
+				success: function(data) {
+					console.log(data);
+					var model = $("<div></div>")
+					$(model).html(data);
+					$(".ccc").html($(model).children("#helpdocschedule").val());
+					//$("#ddd").append(model.children("#helpdocschedule").val());
+					$(".print").click(function () {
+						$("#ddd").jqprint();
+					})
+				},
+				error: function (err) {
+					console.log(err)
+				}
+			});
+		</script>
+	</body>
+</html>

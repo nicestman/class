@@ -1,0 +1,220 @@
+body {
+	text-align: center;
+}
+@charset "utf-8";
+body,ul,li,h1,h2,h3,h4,h5,h6,div,table,tr,th,td,label,thead,tbody,input,dl,dt,dd,p,span{
+	margin: 0;
+	padding: 0;
+}
+ul li{
+	list-style: none;
+}
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix{
+	zoom: 1;
+}
+
+/*检验报告的公共样式*/
+.itmeAll{
+	width: 660px;
+	height: 450px;
+	padding: 15px;
+	background-color: #fff;
+	margin: 0 auto;
+	font-size: 12px;
+}
+.itmeAll input{
+	height: 16px;
+	padding: 0;
+	margin: 0;
+}
+.itmeAll label{
+	display: inline-block;
+	font-size: 12px;
+}
+.itmeAll li{
+	float: left;
+}
+/*检验报告标题的公共样式*/
+.itmeAll>.title{
+	border-bottom: 2px solid #0d0d0d;
+	margin: 0 0 2px;
+}
+.itmeAll>.title>h2{
+	text-align: center;
+}
+/*检验报告患者信息的公共样式*/
+.itmeAll>.patient_info,.itmeAll>.inspection_result,.itmeAll>.inspection_result>table{
+	width: 660px;
+	font-size: 12px;
+}
+.itmeAll>.patient_info{
+	height: 68px;
+}
+.itmeAll>.patient_info>ul:nth-of-type(2){
+	margin: 2px 0;
+}
+.itmeAll>.patient_info>ul>li>input,.itmeAll>.patient_info>ul>li>label{
+	float: left;
+}
+.itmeAll>.patient_info>ul>li>input{
+	font-size: 12px;
+	margin: 2px 0 0;
+	line-height: 16px;
+}
+.itmeAll>.patient_info>ul>li>label{
+	line-height: 20px;
+	text-align: right;
+	margin: 0 0 0 2px;
+}
+/*检验报告检查结果的公共样式*/
+.itmeAll>.inspection_result{
+	border-bottom: 1px solid #616161;
+	padding: 0 0 2px;
+}
+.itmeAll>.inspection_result>table{
+	border-collapse: collapse;
+	border: 0 none;
+	text-align: left;
+}
+.itmeAll>.inspection_result>table>thead>tr{
+	border-top: 2px solid #050505;
+	border-bottom: 2px solid #050505;
+}
+.itmeAll>.inspection_result>table>thead>tr>th,.itmeAll>.inspection_result>table>tbody>tr>td{
+	height: 16px;
+}
+.itmeAll table p{
+	height: 16px;
+}
+/*检验报告其他信息的公共样式*/
+.itmeAll>.other_info>dl{
+	height: 20px;
+}
+.itmeAll>.other_info>dl>dd{
+	float: left;
+}
+.itmeAll>.other_info>dl>dd>label{
+	width: 60px;
+	line-height: 20px;
+}
+.itmeAll>.other_info>P{
+	text-align: right;
+	font-size: 14px;
+}
+
+/*按钮样式*/
+button{
+	outline: none;
+	cursor: pointer;
+}
+
+
+/*生化检验*/
+/*生化检验的患者信息*/
+.shenghua>.patient_info>ul{
+	padding: 0 4px;
+}
+.shenghua>.patient_info>ul>li>input{
+	width: 80px;
+}
+.shenghua>.patient_info>ul>li>input.text_info{
+	width: 53px;
+}
+.shenghua>.patient_info>ul>li:nth-of-type(5)>input{
+	min-width: 82px;
+}
+.shenghua>.patient_info>ul:nth-of-type(3)>li:nth-of-type(n+2)>input{
+	width: 172px;
+}
+/*生化检验的检查结果*/
+.shenghua>.inspection_result>table>tbody>tr>td:nth-of-type(1),.shenghua>.inspection_result>table>thead>tr>th:nth-of-type(1){
+	padding: 0 0 0 8px;
+}
+/*生化检验的其他信息*/
+.shenghua>.other_info{
+	border-top: 1px solid #616161;
+}
+.shenghua>.other_info>dl{
+	padding: 4px 4px 0 6px;
+}
+.shenghua>.other_info>dl>dd>input{
+	width: 80px;
+}
+.shenghua>.other_info>dl>dd>label{
+	margin: 0 0 0 2px;
+}
+.shenghua>.other_info>dl>dd>p{
+	line-height: 20px;
+	margin: 0 0 0 4px;
+}
+.shenghua>.other_info>dl>dd>p>span{
+	margin: 0 2px;
+}
+.shenghua>.other_info>P{
+	margin: 6px 0 0;
+}
+
+
+/*血常规检验*/
+/*血常规检验的标题*/
+.xuechanggui>.title{
+	position: relative;
+}
+.xuechanggui>.title>p{
+	position: absolute;
+	bottom: 6px;
+	right: 4px;
+}
+/*血常规检验的患者信息*/
+.xuechanggui>.patient_info>ul>li>input{
+	width: 99px;
+}
+/*血常规检验的检验结果*/
+.xuechanggui>.inspection_result{
+	height: 308px;
+}
+.xuechanggui>.inspection_result>table{
+	width: 330px;
+	float: left;
+	position: relative;
+}
+.xuechanggui>.inspection_result>table.table1:after{
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 308px;
+	border-left: 1px solid #353535;
+	border-right: 1px solid #353535;
+	position: absolute;
+	top: 0;
+	right: -1px;
+	z-index: 999;
+}
+.xuechanggui>.inspection_result>table>thead>tr>th,.xuechanggui>.inspection_result>table>tbody>tr>td{
+	text-indent: 6px;
+}
+/*血常规检验的其他信息*/
+.xuechanggui>.other_info{
+	border-top: 1px solid #010101;
+}
+.xuechanggui>.other_info>dl{
+	margin: 2px 0 0;
+}
+.xuechanggui>.other_info>dl>dd>input{
+	width: 64px;
+	margin: 0 2px 0 0;
+	float: left;
+}
+.xuechanggui>.other_info>dl>dd>label{
+	float: left;
+}
+.xuechanggui>.other_info>P{
+	margin: 4px 0 0;
+}	

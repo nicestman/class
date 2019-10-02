@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>打印报告单</title>
+		<link rel="stylesheet" type="text/css" href="css/form.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<script language="javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script language="javascript" src="js/jquery.jqprint-0.3.js"></script>
+		<style type="text/css">
+			.ddd {
+				width: 800px;
+				margin: 0 auto;
+				/* border: 1px solid #ccc; */
+			}
+			.ddd {
+				width: 100%;
+				height: 100%;
+				/*page-break-after: always;*/
+			}
+			.ddd table {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<!--<select name='dog' id='dog'>
+			<optgroup label='bigDogs'>
+				<option id='lab' label='lab' value='lab'> Labrador retriever </option>
+				<option id='golden' label='golden' value='golden'> Golden retriever </option>
+			</optgroup>
+			<option id='pug' label='pug' value='pug'> Pug </option>
+		</select>-->
+		<div> <input type="text" id="" value="" /> <input type="button" id="" value="确定" /> </div>
+		<div id="aaa" class="aaa">
+			<div id="ddd" class="ddd">
+				<!--<table>
+					<tr>
+						<th>Header</th>
+						<th>Header</th>
+						<th>Header</th>
+						<th>Header</th>
+					</tr>
+					<tr>
+						<td>Data</td>
+						<td>Data</td>
+						<td>Data</td>
+						<td>Data</td>
+					</tr>
+					<tr>
+						<td>Data</td>
+						<td>Data</td>
+						<td>Data</td>
+						<td>Data</td>
+					</tr>
+					<tr>
+						<td>Data</td>
+						<td>Data</td>
+						<td>Data</td>
+						<td>Data</td>
+					</tr>
+				</table>-->
+				<table id="table" class="table public-table">
+					<tr>
+						<td>姓名</td>
+						<td>胡云芳</td>
+						<td>联系方式</td>
+						<td>15820224305</td>
+					</tr>
+					<tr>
+						<td>职称</td>
+						<td>主任医师</td>
+						<td>科室</td>
+						<td>口腔科</td>
+					</tr>
+					<tr>
+						<td>帮扶日期</td>
+						<td>2018-10-20 - 2018-10-27</td>
+						<td>帮扶天数</td>
+						<td>8</td>
+					</tr>
+					<tr>
+						<td>受援单位</td>
+						<td>望城区桥驿中心卫生院</td>
+						<td>帮扶类别</td>
+						<td>名医工作室</td>
+					</tr>
+					<tr>
+						<td>帮扶计划</td>
+						<td colspan="3">待专家填写帮扶计划</td>
+					</tr>
+					<tr>
+						<td>医生帮扶情况</td>
+						<td colspan="3">完成帮扶</td>
+					</tr>
+					<tr>
+						<td>分配科室</td>
+						<td colspan="3">眼科</td>
+					</tr>
+					<tr>
+						<td colspan="4" class="feedback-title"> 医联体专家帮扶反馈表 </td>
+					</tr>
+					<tr>
+						<td>开展工作</td>
+						<td colspan="3">查房带教</td>
+					</tr>
+					<tr>
+						<td>下乡种类</td>
+						<td colspan="3">名医工作室</td>
+					</tr>
+					<tr>
+						<td>工作照片</td>
+						<td colspan="3">
+							<ul class="doctorPhoto flex-row">
+								<li class="flex-center"> <img src="https://imuts.oss-cn-shenzhen.aliyuncs.com/img/docschedule/1540453032546.png" style="max-width:100%;max-height:100%;"> </li>
+								<li class="flex-center"> <img src="https://imuts.oss-cn-shenzhen.aliyuncs.com/img/docschedule/1540453046627.png" style="max-width:100%;max-height:100%;"> </li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>纸质版帮扶反馈表</td>
+						<td colspan="3">
+							<ul class="doctorPhoto flex-row">
+								<li class="flex-center"><img src="https://imuts.oss-cn-shenzhen.aliyuncs.com/img/docschedule/1540453036162.png" /></li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!--<div id="ddd" class="ddd">
+				<table>
+					<tr>
+						<th>Header</th>
+					</tr>
+					<tr>
+						<td>Data</td>
+					</tr>
+				</table>
+			</div>-->
+		</div> <button class="btn print">打印</button>
+		<script language="javascript">
+			$(".print").click(function() {
+				//doPrint();
+				$("#aaa").jqprint();
+			})
+
+			function doPrint() {
+				bdhtml = window.document.getElementById("ddd").innerHTML;
+				sprnstr = "<!--startprint-->";
+				eprnstr = "<!--endprint-->";
+				prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17);
+				prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+				window.document.body.innerHTML = bdhtml;
+				window.print();
+			}
+		</script>
+	</body>
+</html>

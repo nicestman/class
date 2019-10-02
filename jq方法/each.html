@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../jquery-v2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		//跳出档次循环
+		$('ul li').each(function (idx, ele) {
+			if (idx==4||idx==5) {
+				return true;
+			} else if (idx==8) {
+				return false;
+			}
+			console.log(idx);
+		})
+	</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+	<body>
+		<form id="formData">
+			<div>
+				<input type="text" value="" />
+			</div>
+			<div>
+				<input type="text" value="" />
+			</div>
+			<div>
+				<input type="text" value="" />
+			</div>
+			<div>
+				<input type="password" value="" />
+			</div>
+			<div>
+				<input type="submit" value="提交" />
+			</div>
+		</form>
+	</body>
+	<script type="text/javascript">
+		/*var submitBtn = document.getElementById("formData");
+		submitBtn.onsubmit = function () {
+			console.log(this);
+			return false;
+		}*/
+		$("form#formData").submit(function () {
+			console.log(this);
+			return false;
+		})
+	</script>
+</html>

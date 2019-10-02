@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/form.css"/>
+	</head>
+	<body>
+		<div class="wrap">
+			<h1>生化检验报告单</h1>
+			<div class="patient_info">
+				<ul>
+					<li class="clearfix">
+						<label for="name">姓&emsp;&emsp;名:</label>
+						<input type="text" id="name" value="" />
+						<label for="sex">性&emsp;&emsp;别:</label>
+						<input type="text" id="sex" class="text_info" value="" />
+						<label for="age">年&emsp;&emsp;龄:</label>
+						<input type="text" id="age" class="text_info" value="" />
+						<label for="mzh">门&ensp;诊&ensp;号:</label>
+						<input type="text" id="mzh" class="text_info" value="" />
+						<label for="zyh">住&ensp;院&ensp;号:</label>
+						<input type="text" id="zyh" value="" />
+					</li>
+					<li class="clearfix">
+						<label for="sjks">送检科室:</label>
+						<input type="text" id="sjks" value="" />
+						<label for="ch">床&emsp;&emsp;号:</label>
+						<input type="text" id="ch" class="text_info" value="" />
+						<label for="bblx">标本类型:</label>
+						<input type="text" id="bblx" class="text_info" value="" />
+						<label for="bbzt">标本状态:</label>
+						<input type="text" id="bbzt" class="text_info" value="" />
+						<label for="ybh">样&ensp;本&ensp;号:</label>
+						<input type="text" id="ybh" value="" />
+					</li>
+					<li class="clearfix">
+						<label for="time">送检日期:</label>
+						<input type="text" id="time" value="" />
+						<label for="lczd">临床诊断:</label>
+						<input type="text" id="lczd" value="" />
+						<label for="comment">备&emsp;&emsp;注:</label>
+						<input type="text" id="comment" value="" />
+					</li>
+				</ul>
+			</div>
+			<div class="inspection_result">
+				<table cellspacing="" cellpadding="">
+					<thead>
+						<tr>
+							<th>项目名称</th>
+							<th>英文简称</th>
+							<th>结果</th>
+							<th>单位</th>
+							<th>提示</th>
+							<th>参考值范围</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>谷丙转氨酶</td>
+							<td>ALT</td>
+							<td>11.3</td>
+							<td>U/L</td>
+							<td></td>
+							<td>0-40</td>
+						</tr>
+						<tr>
+							<td>谷草转氨酶</td>
+							<td>ASL</td>
+							<td>16.5</td>
+							<td>U/L</td>
+							<td></td>
+							<td>8-40</td>
+						</tr>
+						<tr>
+							<td>谷草/谷丙比值</td>
+							<td>ASL/ALT</td>
+							<td>1.5</td>
+							<td></td>
+							<td></td>
+							<td>0.8-1.5</td>
+						</tr>
+						<tr>
+							<td>总胆红素</td>
+							<td>TBLL</td>
+							<td>8.4</td>
+							<td>umol/l</td>
+							<td></td>
+							<td>3.4-20.5</td>
+						</tr>
+						<tr>
+							<td>直接胆红素</td>
+							<td>DBLL</td>
+							<td>3.7</td>
+							<td>umol/l</td>
+							<td></td>
+							<td>0-6.8</td>
+						</tr>
+						<tr>
+							<td>总蛋白</td>
+							<td>TP</td>
+							<td>67.2</td>
+							<td>g/l</td>
+							<td></td>
+							<td>60-83</td>
+						</tr>
+						<tr>
+							<td>白蛋白</td>
+							<td>ALB</td>
+							<td>46.6</td>
+							<td>g/l</td>
+							<td></td>
+							<td>35-55</td>
+						</tr>
+						<tr>
+							<td>球蛋白</td>
+							<td>GLO</td>
+							<td>20.6</td>
+							<td>g/l</td>
+							<td></td>
+							<td>20-30</td>
+						</tr>
+						<tr>
+							<td>白球比值</td>
+							<td>A/G</td>
+							<td>2.26</td>
+							<td></td>
+							<td></td>
+							<td>1.3-2.5</td>
+						</tr>
+						<tr>
+							<td>尿素</td>
+							<td>Urea</td>
+							<td>4.78</td>
+							<td>mmol/l</td>
+							<td></td>
+							<td>2.50-6.4</td>
+						</tr>
+						<tr>
+							<td>尿酸</td>
+							<td>UA(S)</td>
+							<td>236</td>
+							<td>umol/l</td>
+							<td></td>
+							<td>155-428</td>
+						</tr>
+						<tr>
+							<td>肌酐</td>
+							<td>CRE</td>
+							<td>49.4</td>
+							<td>umol/l</td>
+							<td></td>
+							<td>50-120</td>
+						</tr>
+						<tr>
+							<td>葡萄糖</td>
+							<td>GLU(S)</td>
+							<td>3.99</td>
+							<td>mmol/l</td>
+							<td></td>
+							<td>3.90-6.10</td>
+						</tr>
+						<tr>
+							<td>甘油三酯</td>
+							<td>TG(S)</td>
+							<td>1.19</td>
+							<td>mmol/l</td>
+							<td></td>
+							<td>0.70-1.70</td>
+						</tr>
+						<tr>
+							<td>总胆固醇</td>
+							<td>TC(S)</td>
+							<td>1.76</td>
+							<td>mmol/l</td>
+							<td></td>
+							<td>2.33-6.20</td>
+						</tr>
+						<tr>
+							<td>高密度脂蛋白胆固醇</td>
+							<td>HDL-C</td>
+							<td>1.38</td>
+							<td>mmol/l</td>
+							<td></td>
+							<td>0.91-2.00</td>
+						</tr>
+						<tr>
+							<td>低密度脂蛋白胆固醇</td>
+							<td>LDL-C</td>
+							<td>2.39</td>
+							<td>mmol/l</td>
+							<td></td>
+							<td>0.50-3.36</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="other_info">
+				<dl class="clearfix">
+					<dd>
+						<label for="sjys">送检医师:</label>
+						<input type="text" id="sjys" value="" />
+					</dd>
+					<dd>
+						<label for="jys">检验师:</label>
+						<input type="text" id="jys" value="" />
+					</dd>
+					<dd>
+						<label for="shz">审核者:</label>
+						<input type="text" id="shz" value="" />
+					</dd>
+					<dd>
+						<label for="report_time">报告时间:</label>
+						<input type="text" id="report_time" value="" />
+					</dd>
+					<dd>
+						<p>第<span id="pg">1</span>&frasl;<span id="pg">1</span>页</p>
+					</dd>
+				</dl>
+				<p>此结果仅对该标本负责，如有疑问，请在三天内提出，以便复查！</p>
+			</div>
+		</div>
+	</body>
+</html>

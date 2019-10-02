@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<!--<script type="module">
+			import modul from './modeltable.js';
+			console.log(modul);
+			$('div').html(modul);
+		</script>-->
+		<script type="text/javascript">
+			let str = 'asdf{{a ? a : ""}}asdfasdfasdfasdfasdfasdfasdf{{a ? a : ""}}'
+			let a = 'keven'
+//			let reg = /({{)([\s\S]*)(}})/
+			let reg = /(?<={{)[^{{}}]*(?=}})/g
+			let getJs = str.match(reg)
+			let getVal = eval(getJs[0])
+			// 简单版，未匹配数字
+			let getVal2 = getJs[0].replace(/([a-zA-Z_$]+(\.[a-zA-Z_$]+)*)/g,'this.$1')
+			// 标准版，按命名规则匹配
+			//let getVal2 = getJs[0].replace(/([a-zA-Z_$]{1}[a-zA-Z_$0-9]*(\.[a-zA-Z_$]{1}[a-zA-Z_$0-9]*)*)/g,'this.$1')
+			//let getVal2 = getJs[1].replace(/([a-zA-Z_$]{1}[\w$]*(\.[a-zA-Z_$]{1}[\w$]*)*)/g,'this.$1')
+			console.log('getJs', getJs)
+			console.log('getVal', getVal)
+			console.log('getVal2', getVal2)
+			console.log( 'result', str.replace( reg, getVal) )
+		</script>
+	</head>
+	<body>
+		<div>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+	</script>
+</html>

@@ -1,0 +1,121 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul li{
+	list-style: none;
+}
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix{
+	zoom: 1;
+}
+body{
+	background-color: #e0e0e0;
+}
+.wrap{
+	width: 660px;
+	height: 450px;
+	padding: 15px;
+	background-color: #fff;
+	margin: 100px auto;
+	font-size: 12px;
+}
+
+/*标题*/
+.wrap>.title{
+	position: relative;
+}
+.wrap>.title>h1{
+	text-align: center;
+	border-bottom: 2px solid #0d0d0d;
+	font-size: 20px;
+	margin: 0 0 1px;
+}
+.wrap>.title>p{
+	position: absolute;
+	bottom: 6px;
+	right: 4px;
+}
+
+
+
+/*患者信息*/
+.wrap>.patient_info,.wrap>.inspection_result{
+	width: 660px;
+}
+.wrap>.patient_info,.wrap>.patient_info>ul{
+	height: 70px;
+}
+.wrap>.patient_info>ul>li:nth-of-type(2){
+	margin: 2px 0;
+	text-align: center;
+}
+.wrap>.patient_info>ul>li>input,.wrap>.patient_info>ul>li>label{
+	float: left;
+}
+.wrap>.patient_info>ul>li>input{
+	width: 106px;
+	height: 16px;
+	font-size: 12px;
+}
+.wrap>.patient_info>ul>li>label{
+	line-height: 22px;
+	margin: 0 0 0 1px;
+}
+
+/*检查结果*/
+.wrap>.inspection_result{
+	height: 308px;
+	border-bottom: 1px solid #929292;
+}
+.wrap>.inspection_result .table-left{
+	width: 328px;
+	float: left;
+}
+.wrap>.inspection_result .table-right{
+	float: left;
+	width: 330px;
+	height: 100%;
+	border-left: 2px solid #353535;
+}
+.wrap>.inspection_result div table{
+	border-collapse: collapse;
+	width: 100%;
+	border: 0 none;
+	font-size: 12px;
+	text-align: left;
+}
+.wrap>.inspection_result div table thead tr{
+	border-top: 2px solid #050505;
+	border-bottom: 2px solid #050505;
+}
+
+/*其他信息*/
+.wrap>.other_info{
+	border-top: 1px solid #010101;
+}
+.wrap>.other_info>dl{
+	height: 20px;
+	margin: 2px 0 0;
+}
+.wrap>.other_info>dl>dd{
+	float: left;
+}
+.wrap>.other_info>dl>dd>input{
+	width: 70px;
+	margin: 0 2px 0 0;
+}
+.wrap>.other_info>dl>dd>label{
+	width: 40px;
+}
+.wrap>.other_info>P{
+	text-align: right;
+	font-size: 14px;
+	margin: 4px 0 0;
+}	

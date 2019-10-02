@@ -1,0 +1,181 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+input, button, select, textarea {
+	font-family: "微软雅黑";
+	outline: none;
+	resize: none;
+	box-sizing: border-box;
+}
+button {
+	cursor: pointer;
+	overflow-x: visible;
+	border: none;
+	outline: none;
+}
+
+/*flex布局*/
+
+.flex, .flex-center, .flex-row, .flex-column, .flex-row-center, .flex-column-center, .flex-inline {
+	display: flex;
+	box-sizing: border-box;
+	align-items: center;
+	align-content: center;
+}
+.flex-inline {
+	display: inline-flex;
+}
+.flex-center, .flex-row-center, .flex-column-center {
+	justify-content: center;
+}
+.flex-row, .flex-row-center {
+	flex-direction: row;
+}
+.flex-column, .flex-column-center {
+	flex-direction: column;
+}
+.download-btn {
+	display: inline-block;
+	margin-left: 20px;
+	height: 36px;
+	line-height: 36px;
+	padding: 0 8px;
+	background-color: #028eed;
+	color: #fff;
+}
+.btn {
+	width: 80px;
+	height: 40px;
+	line-height: 40px;
+	background-color: #028eed;
+	color: #fff;
+	margin: 10px 5px;
+	border-radius: 4px;
+}
+#ddd {
+	width: 800px;
+	margin: 0 auto;
+	/*border: 1px solid #ccc;*/
+}
+#ddd table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	color: #333;
+	text-align: left;
+	background: -webkit-linear-gradient(top, #d8f2fb, #ffffff);
+	/*background: #e5e5e5;*/
+}
+#ddd table tr {
+	height: 42px;
+	border-top: 1px solid #ccc;
+}
+#ddd table tr td {
+	padding: 0 32px;
+	border-left: 1px solid #ccc;
+	max-width: 200px;
+}
+
+/*帮扶管理*/
+
+#ddd table#table tr td:first-child {
+	max-width: 50px;
+}
+#ddd table#table tr td textarea {
+	width: 100%;
+	margin: 10px 0;
+	padding: 10px;
+}
+#ddd table#table tr td .doctorPhoto {
+	padding-top: 10px;
+	flex-wrap: wrap;
+}
+#ddd table#table tr td .doctorPhoto li {
+	position: relative;
+	width: 164px;
+	height: 146px;
+	align-items: center;
+	cursor: pointer;
+	color: rgba(0, 0, 0, 0);
+	text-align: center;
+	background: no-repeat center;
+	background-size: contain;
+	margin: 0 10px 10px 0;
+	overflow: hidden;
+}
+#ddd table#table tr td .doctorPhoto li img {
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+}
+#ddd table#table tr td .plupload li:last-child {
+	color: rgba(0, 0, 0, 0);
+	background: url(../images/upload_btn.png) no-repeat center /120%;
+	margin-right: 0;
+}
+#ddd table#table tr td .plupload li .upload-del {
+	width: 20px;
+	height: 20px;
+	color: rgba(0, 0, 0, 0);
+	text-indent: 999px;
+	background: url(../images/upload_del.png) no-repeat center /contain;
+	padding: 0;
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	z-index: 10;
+	overflow: hidden;
+}
+#ddd table#table tr td .plupload li:last-child span {
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	text-indent: 9999px;
+	line-height: 240px;
+}
+#ddd table#table tr td .singleUpload li:last-child img {
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+#ddd table#table tr td .selector-container {
+	flex-wrap: wrap;
+	padding: 10px 0;
+}
+#ddd table#table tr td .selector-container li {
+	min-width: 160px;
+	height: 30px;
+	line-height: 30px;
+	color: rgba(16, 16, 16, 1);
+	font-size: 14px;
+}
+#ddd table#table tr td .selector-container li label {
+	display: inline-flex;
+	justify-content: flex-start;
+	align-items: center;
+	cursor: pointer;
+}
+#ddd table#table tr td .selector-container li .input-other {
+	width: 200px;
+	height: 24px;
+	margin-left: 4px;
+}
+#ddd table#table tr td .selector-container li [type=checkbox], table#table tr td .selector-container li [type=radio] {
+	margin-right: 4px;
+}
+#ddd table#table tr td.feedback-title {
+	width: 682px;
+	height: 45px;
+	color: rgba(16, 16, 16, 1);
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}

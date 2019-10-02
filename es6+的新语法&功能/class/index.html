@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button id="aBtn">a</button>
+		<button id="bBtn">b</button>
+	</body>
+	<script type="text/javascript">
+		class A {
+			constructor(val) {
+				this.value = val
+			}
+			alert() {
+				alert(this.value)
+			}
+			b(val) {
+				let self = this
+				return new (class B {
+					constructor(val) {
+						this.value = val
+						self.value = val
+					}
+				})(val)
+			}
+		}
+		let a = new A('aaa')
+		aBtn.onclick = function () {
+			a.alert()
+		}
+		bBtn.onclick = function () {
+			a.b('bbb')
+		}
+		
+		
+		let rects = (x, y, w, h) => {
+			return new (class Rect {
+				constructor(x, y, w, h) {
+					this.setRect(x, y, w, h)
+				}
+				setRect(x, y, w, h) {
+					this.topX = x
+					this.topY = y
+					this.centerX = x + w / 2
+					this.centerY = y + h / 2
+					this.bottomX = x + w
+					this.bottomY = y + h
+					this.width = x + w
+					this.height = y + h
+				}
+				
+			})(x, y, w, h)
+		}
+		console.log(rects(0,0,0,0))
+	</script>
+</html>

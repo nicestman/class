@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var str = 'search=wo&hash=page';
+			var json;
+
+			function strToJson(str) {
+				/*var arr = str.split('&');*/
+				json = '{' + str.replace(/(\w*[^=&])|(=)|(&)/g, function(wo) {
+					if(wo == (/\w*[^=&]/g).exec(wo)) {
+						return '"' + wo + '"';
+					} else if(wo == '=') {
+						return ':';
+					} else if(wo == '&') {
+						return ',';
+					}
+				}) + '}';
+				/*for(i in arr) {
+					arr[i] = arr[i].replace(/=/,':')
+				}
+				json = JSON.stringify(arr).replace(/^\[([^\[\]]*)\]$/g,'{$1}');*/
+				return console.log(json);
+			};
+			strToJson(str);
+		</script>
+		<script>
+			//解决乱码问题location地址url
+			function getRequest() {
+				var url = window.location.search; //获取url中"?"符后的字串   
+				var theRequest = new Object();
+				if(url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for(var i = 0; i < strs.length; i++) {
+						//就是这句的问题
+						theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+						//之前用了unescape()
+						//才会出现乱码  
+					}
+				}
+				return theRequest;
+			}
+			var arr = getRequest();
+			var searchtxt = arr['searchtxt']; //参数名
+		</script>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="html2canvas.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="demo">
+			<img id="image" src="https://imuts.oss-cn-shenzhen.aliyuncs.com/doctorGroup/mettingFile/20180804112348-lum3n-250309-unsplash.jpg" />
+		</div>
+		<canvas id="canvas" width="300" height="300"></canvas>
+		<script type="text/javascript">
+			var imgBlob;
+			var images = document.getElementById("image");
+			var canvas = document.getElementById("canvas");
+			var cxts = canvas.getContext("2d");
+			var img = new Image();
+			img.crossOrigin="anonymous";
+			/*img.src = images.src;*/
+			img.src = images.src+"?"+new Date().getTime();
+			img.onload = function () {
+				cxts.drawImage(img,0,0,300,300);
+				imgBlob = canvas.toDataURL("image/jpeg");
+				var Img = document.createElement("img");
+				Img.src = imgBlob;
+				document.body.appendChild(Img);
+			}
+			/*html2canvas(document.getElementById("demo"), {
+				useCORS: true, //使用跨域(当allowTaint为true时这段代码没什么用,下面解释)
+				backgroundColor: "#000",
+				scale: 2,
+				width: images.width,
+				height: images.height,
+			}).then(function(canvas) {
+				imgBlob = canvas.toDataURL('image/jpeg', 1.0); //将图片转为base64
+				//imgBlob = imgBlob.toString().substring(imgBlob.indexOf(",") + 1); //截取base64以便上传
+				var img = document.createElement("img");
+				img.src = imgBlob;
+				document.body.appendChild(img);
+			})*/
+		</script>
+	</body>
+</html>

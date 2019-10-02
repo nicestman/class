@@ -1,0 +1,119 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul li{
+	list-style: none;
+}
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix{
+	zoom: 1;
+}
+body{
+	background-color: #e0e0e0;
+}
+.wrap{
+	width: 660px;
+	height: 450px;
+	padding: 15px;
+	background-color: #fff;
+	margin: 100px auto;
+	font-size: 12px;
+}
+.wrap>h1{
+	text-align: center;
+	border-bottom: 2px solid #848484;
+	font-size: 20px;
+	margin: 0 0 2px;
+}
+/*患者信息*/
+.wrap>.patient_info,.wrap>.inspection_result,.wrap>.inspection_result>table{
+	width: 660px;
+}
+.wrap>.patient_info{
+	height: 70px;
+}
+.wrap>.patient_info>ul{
+	padding: 0 4px;
+}
+.wrap>.patient_info>ul>li:nth-of-type(2){
+	margin: 2px 0;
+}
+.wrap>.patient_info>ul>li>input,.wrap>.patient_info>ul>li>label{
+	float: left;
+}
+.wrap>.patient_info>ul>li>input{
+	width: 98px;
+	height: 14px;
+	font-size: 12px;
+	margin: 0 0 0 2px;
+}
+.wrap>.patient_info>ul>li>input.text_info{
+	width: 48px;
+}
+.wrap>.patient_info>ul>li:nth-of-type(3)>input:nth-of-type(n+2){
+	width: 158px;
+}
+.wrap>.patient_info>ul>li>label{
+	display: inline-block;
+	width: 54px;
+	height: 22px;
+	line-height: 22px;
+	text-align: right;
+	margin: 0 0 0 2px;
+}
+
+/*检查结果*/
+.wrap>.inspection_result{
+	border-bottom: 1px solid #616161;
+}
+.wrap>.inspection_result>table{
+	border-collapse: collapse;
+	border: 0 none;
+	font-size: 12px;
+	text-align: left;
+}
+.wrap>.inspection_result>table>thead>tr{
+	border-top: 2px solid #050505;
+	border-bottom: 2px solid #050505;
+}
+.wrap>.inspection_result>table>tbody>tr>td:nth-of-type(1),.wrap>.inspection_result>table>thead>tr>th:nth-of-type(1){
+	padding: 0 0 0 8px;
+}
+
+/*其他信息*/
+.wrap>.other_info{
+	border-top: 1px solid #dadada;
+}
+.wrap>.other_info>dl{
+	height: 20px;
+	padding: 4px 4px 0 6px;;
+}
+.wrap>.other_info>dl>dd{
+	float: left;
+}
+.wrap>.other_info>dl>dd>input{
+	width: 94px;
+}
+.wrap>.other_info>dl>dd>label{
+	width: 40px;
+	margin: 0 0 0 2px;
+}
+.wrap>.other_info>dl>dd>p{
+	line-height: 20px;
+	margin: 0 0 0 4px;
+}
+.wrap>.other_info>dl>dd>p>span{
+	margin: 0 2px;
+}
+.wrap>.other_info>P{
+	text-align: right;
+	font-size: 14px;
+	margin: 6px 0 0;
+}	
