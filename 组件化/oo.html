@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<!--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
+	<script src="../web/js/jquery-1.8.3.min.js"></script>
+	<!--js小知识-->
+	<!--<script type="text/javascript">
+		var obj = {
+			'num': 132
+		};
+
+		function isEmptyObject(e) {
+			var t;
+			for(t in e) return !1; //与if同理默认跟随的
+			return !0
+		}
+		console.log(!0)
+		console.log(!1)
+		console.log(isEmptyObject(obj))
+		//		function error(e) {
+		//			throw e;
+		//		}
+		//		error(132)
+		var bl = true;
+		var n = null;
+		var udf = undefined;
+		var num = 123;
+		var str = 'num';
+		var obj = {
+			'num': 123
+		};
+		var arr = [12, 32];
+
+		function fun() {
+
+		};
+		h = Object.prototype.toString;
+		console.log(h.call(bl))
+		console.log(h.call(num))
+		console.log(h.call(str))
+		console.log(h.call(obj))
+		console.log(h.call(fun))
+		console.log(h.call(n))
+		console.log(h.call(udf))
+		console.log(h.call(arr))
+		console.log(String(fun))
+		var O = {};
+
+		function type(e) {
+			return e == null ? String(e) : O[h.call(e)] || "object"
+		}
+		console.log(type(fun))
+		console.log($.type(fun))
+	</script>
+	<!--jquery的prototype赋值写法-->
+	<!--<script type="text/javascript">
+		Jq = function() {
+			return new Jq.fn.init();
+		}
+		Jq.fn = Jq.prototype = {
+			constructor: Jq,
+			init: function() {
+				return this;
+			}
+		};
+		Jq.fn.init.prototype = Jq.fn;
+		console.log(Jq());
+		console.log($());
+		//		Jq.extend = Jq.fn.extend = function () {
+		//			var target=arguments[0],i=1,length=arguments.length,options;
+		//			if(i === length) {
+		//				target = this;
+		//				i -= 1
+		//			}
+		//			for(; i < length; i += 1) {
+		//				if((options = arguments[i]) != null) {
+		//					for(attr in options) {
+		//						//console.log(typeof (options[attr]),options[attr],attr,options);
+		//						//前面的判断是用来整合两个对象的属性和方法
+		//						//typeof options[attr] == 'object' ? (target[attr] = Jq.extend(options[attr]),console.log(options[attr])) : (target[attr] = options[attr],console.log(attr,this));
+		//						target[attr] = options[attr];
+		//					}
+		//				}
+		//			}
+		//	        return target;
+		//		}
+		var h = Object.prototype.toString,
+			O = {
+				'object Array': 'array',
+				'object Object': 'object'
+			};
+
+		function type(e) {
+			return e == null ? String(e) : O[h.call(e)] || "object"
+		}
+		Jq.extend = Jq.fn.extend = function() {
+			var o, n, r, t, b, a, s = arguments[0] || {},
+				len = arguments.length,
+				bl = !1,
+				iv = 1;
+			typeof s == 'boolean' && (l = s, s = arguments[1], iv = 2), typeof s == 'object' || typeof s == 'function' || (s = {}), len === iv && (s = this, iv -= 1);
+			for(; iv < len; iv++) {
+				if(null != (e = arguments[iv])) {
+					for(a in e) {
+						r = s[a], t = e[a];
+						if(s === t) continue;
+						bl && t && (type(t) == 'object' || (b = type(t) == 'array')) ? (b ? (s = !1, o = r && type(t) == 'array' ? r : []) : (o = r && type(t) == 'object' ? r : {}), s[a] = Jq.extend(bl, o, t)) : t !== undefined && (s[a] = t);
+					}
+				}
+			}
+			return s;
+		}
+		//		console.log(Jq.extend({'obj':{'num':123,'str':'123'},'name':'jq'}))
+		console.log(Jq.extend({
+			'num': 123,
+			'str': '123'
+		}, {
+			'name': 'jq'
+		}))
+	</script>
+	<!--解决通过prototype赋值型继承的应用同一个对象的问题-->
+	<!--<script type="text/javascript">
+		/**
+		 * 解决通过prototype赋值型继承的应用同一个对象的问题
+		 * @constructor
+		 */
+
+		//通过中间函数来解决
+		function A() {}
+		A.prototype = {
+			a: 666
+		}
+
+		function Bridge() {}
+		Bridge.prototype = A.prototype;
+
+		function B() {}
+		//B.prototype=A.prototype;//相当于数组引用，改变任意类都会同步更新
+		B.prototype = new Bridge();
+		//B.prototype=Object.create(A.prototype,B.prototype);//es5提供的简洁的原型继承方法
+
+		function C() {}
+		C.prototype=Object.create(B.prototype,C.prototype);//es5提供的简洁的原型继承方法
+		
+		var a = new A();
+		var b = new B();
+		var c = new C();
+		var br = new Bridge();
+		alert(A.prototype == B.prototype); //说明他们的原型被分开
+		alert(a.a === b.a); //输出:true  子类共享父类的原型属性(方法)
+		//为父类动态添加方法
+		A.prototype.lala = function() {
+			alert(1);
+		}
+		b.lala(); //输出:1  子类获得了这个方法
+
+		B.prototype.lele = function() {
+			alert(2);
+		}
+		
+		//a.lele();//error  父类不具有子类的方法
+		
+		console.log(a);
+		console.log(br);
+		console.log(b);
+		console.log(c);
+		alert(b instanceof A); //true
+		alert(b instanceof B); //true
+	</script>-->
+	<!--jquery的作者John Resig的oo实现方式-->
+	<script type="text/javascript">
+		var initializing = false, fnTest = /xyz/.test(function(){xyz;}) ? /\b_super\b/ : /.*/;
+ 
+  // The base Class implementation (does nothing)
+  // 超级父类
+  Class = function(){};
+ 
+  // Create a new Class that inherits from this class
+  // 生成一个类，这个类会具有extend方法用于继续继承下去
+  Class.extend = function(prop) {
+    //保留当前类，一般是父类的原型
+    //this指向父类。初次时指向Class超级父类
+    var _super = this.prototype;
+   
+    // Instantiate a base class (but only create the instance,
+    // don't run the init constructor)
+    //开关 用来使原型赋值时不调用真正的构成流程
+    initializing = true;
+    var prototype = new this();
+    initializing = false;
+	        	console.log(this)
+   
+    // Copy the properties over onto the new prototype
+    for (var name in prop) {
+		// Check if we're overwriting an existing function
+		//这边其实就是很简单的将prop的属性混入到子类的原型上。如果是函数我们就要做一些特殊处理
+    	prototype[name] = typeof prop[name] == "function" && typeof _super[name] == "function" && fnTest.test(prop[name]) ?
+		(function(name, fn){
+        	//通过闭包，返回一个新的操作函数.在外面包一层，这样我们可以做些额外的处理
+	        return function() {
+	            var tmp = this._super;
+	            // Add a new ._super() method that is the same method
+	            // but on the super-class
+	            // 调用一个函数时，会给this注入一个_super方法用来调用父类的同名方法
+	            this._super = _super[name];
+	            // The method only need to be bound temporarily, so we
+	            // remove it when we're done executing
+	            //因为上面的赋值，是的这边的fn里面可以通过_super调用到父类同名方法
+	            var ret = fn.apply(this, arguments);  
+				console.log(this._super)
+	            //离开时 保存现场环境，恢复值。
+	            this._super = tmp;
+	        	console.log(this)
+	            return ret;
+	        };
+        })(name, prop[name]) :
+        prop[name]!==undefined&&prop[name];
+    }
+   
+    // 这边是返回的类，其实就是我们返回的子类
+    function Class() {
+      // All construction is actually done in the init method
+      if ( !initializing && this.init )
+        this.init.apply(this, arguments);
+    }
+   
+    // 赋值原型链，完成继承
+    Class.prototype = prototype;
+   
+    // 改变constructor引用
+    Class.prototype.constructor = Class;
+ 
+    // 为子类也添加extend方法
+    Class.extend = arguments.callee;
+   
+    return Class;
+  };
+		var Person = Class.extend({
+			init: function(isDancing) {
+				this.dancing = isDancing;
+			},
+			dance: function() {
+				return this.dancing;
+			}
+		});
+		console.log(Person)
+		var Ninja = Person.extend({
+			init: function() {
+				this._super(false);
+			},
+			dance: function() {
+				// Call the inherited version of dance()
+				return this._super();
+			},
+			swingSword: function() {
+				return true;
+			}
+		});
+
+		var p = new Person(true);
+		console.log(p)
+		p.dance(); // => true
+
+		var n = new Ninja();
+		console.log(n)
+		n.dance(); // => false
+		console.log(n.swingSword()); // => true
+
+		// Should all be true
+		p instanceof Person && p instanceof Class && n instanceof Ninja && n instanceof Person && n instanceof Class
+	</script>
+</html>

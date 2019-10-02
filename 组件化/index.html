@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+//		function A() {
+//			return new A.fn.init();
+//		}
+//		A.fn=A.prototype={
+//			init:function () {
+//				
+//			},
+//			constructor: A
+//		}
+//		A.fn.init.prototype = A.prototype;
+//		A.extend = A.fn.extend = function () {
+//			console.log(this());
+//			for (var i=0;i<1;i++) {
+//				(function () {
+//					return function () {
+//						console.log(this)
+//					};
+//				})()
+//			}
+//			return this;
+//		}
+//		var a = 5A.extend();
+//		console.log(a)
+		var initializing = false,fnTest = /xyz/.test(function () {xyz}) ? /\b_super\b/ : /.*/;//true:fnTest=/\b_super\b/,false:fnTest=/.*/。
+		A = function () {}
+		A.extend  = function (prop) {
+			var _super = this.prototype;
+			initializing = true;
+			var	prototype = new this();
+			initializing = false;
+			console.log(this);
+			for (var name in prop) {
+				prototype[name] = typeof prop[name] == 'function' && typeof _super[name] == 'function' && fnTest.test(prop[name]) ? 
+				(function (name,fn) {
+						console.log(this);
+					return function () {
+						var tmp = this._super;
+						this._super = _super[name];//把与父类相同的方法赋给子类
+						var ret = fn.apply(this,arguments);//再调用子类方法调用父类的同名方法
+						this._super = tmp;//回归初始状态
+						console.log(_super[name]);
+						console.log(fn);
+						console.log(this);
+						return ret;
+					};
+				})(name, prop[name]) : prop[name] !== undefined && prop[name];
+			}
+			function A() {
+				if (!initializing&&this.init) {
+					this.init.apply(this, arguments);
+				}
+			}
+			A.prototype = prototype;
+			A.prototype.constructor = A;
+			A.extend = arguments.callee;
+			return A;
+		}
+		var Aa = A.extend({
+			init: function (isDancing) {
+				this.danceing = isDancing;
+			},
+			dance: function () {
+				return this.danceing;
+			}
+		});
+		var Bb = Aa.extend({
+			init: function () {
+				this._super(true);
+			},
+			dance: function () {
+				return this._super;
+			}
+		})
+		var a = new Aa(false);
+		console.log(a)
+		a.dance();
+		var b = new Bb();
+		console.log(b)
+	</script>
+</html>
