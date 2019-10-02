@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<img id="img" src="img/2.jpeg"/>
+		<script type="text/javascript">
+			var img = document.getElementById('img');
+			var startTime = new Date();
+			console.log(startTime);
+			img.onload = function () {
+				var endTime = new Date();
+				console.log(endTime);
+			}
+		</script>
+	</body>
+</html>

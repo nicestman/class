@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			video{
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<video width="100" height="100"></video>
+		<canvas width="1000" height="562.5"></canvas>
+		<div>
+			<button id="snap">截取图像</button>
+			<button id="close">关闭摄像头</button>
+			<button id="upload">上传图像</button>
+		</div>
+		<img id="uploaded" width="200" height="150" />
+	</body>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		// 获取媒体方法（旧方法）
+		navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMeddia || navigator.msGetUserMedia;
+		console.log(navigator)
+		var canvas = $('canvas'),
+			context = canvas[0].getContext('2d'),
+			video = $('video'),
+			snap = $('#snap'),
+			close = $('#close'),
+			upload = $('#upload'),
+			uploaded = $('#uploaded'),
+			mediaStreamTrack;
+		// 获取媒体方法（新方法）
+		// 使用新方法打开摄像头
+		if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+			navigator.mediaDevices.getUserMedia({
+				video: {
+					width: {
+						min: 0,
+						max: 2058
+					},
+					height: {
+						min: 0,
+						max: 2058
+					}
+				},
+				//video:true,
+				audio: true
+			}).then(function(stream) {
+				//          console.log(stream);
+				mediaStreamTrack = typeof stream.stop === 'function' ? stream : stream.getTracks()[1];
+				video[0].src = (window.URL || window.webkitURL).createObjectURL(stream);
+				video[0].play();
+			}).catch(function(err) {
+				console.log(err);
+			})
+		}
+		// 使用旧方法打开摄像头
+		else if(navigator.getMedia) {
+			navigator.getMedia({
+				video: true
+			}, function(stream) {
+				mediaStreamTrack = stream.getTracks()[0];
+				video.src = (window.URL || window.webkitURL).createObjectURL(stream);
+				video.play();
+			}, function(err) {
+				console.log(err);
+			});
+		}
+		// 截取图像
+		snap[0].addEventListener('click', function() {
+			var scaleDefault = 8 / 6,
+				scaleVideo = video.width() / video.height(),
+				width, height;
+			if(scaleDefault > scaleVideo) {
+				width = video.width() > 800 ? 800 : video.width();
+				height = width * 6 / 8;
+			} else {
+				height = video.height() > 600 ? 600 : video.height();
+				width = height * 8 / 6;
+			}
+			canvas.attr('width', width);
+			canvas.attr('height', height);
+			context.drawImage(video[0], 0, 0, width, height);
+		}, false);
+		// 关闭摄像头
+		close[0].addEventListener('click', function() {
+			mediaStreamTrack && mediaStreamTrack.stop();
+		}, false);
+		// 上传截取的图像
+		upload[0].addEventListener('click', function() {
+			uploaded.attr('src', canvas[0].toDataURL('image/png'));
+			//      jQuery.post('/uploadSnap.php', {
+			//          snapData: canvas[0].toDataURL('image/png')
+			//      }).done(function(rs) {
+			//          rs = JSON.parse(rs);
+			//
+			//          console.log(rs);
+			//
+			//          uploaded.src = rs.path;
+			//      }).fail(function(err) {
+			//          console.log(err);
+			//      });
+		}, false);
+	</script>
+</html>

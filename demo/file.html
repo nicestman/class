@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../jquery/jquery-v2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div {
+				width: 200px;
+				height: 200px;
+				background: #e0e0e0;
+				overflow: hidden;
+				border-radius: 50%;
+				-webkit-border-radius: 50%;
+				cursor: pointer;
+			}
+			p {
+				width: 200px;
+				height: 200px;
+				line-height: 200px;
+				text-align: center;
+				margin: 0;
+			}
+			input[type=file] {
+				visibility: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="">
+			<p>病历资料上传</p>
+			<input type="file" multiple="multiple" name="" id="" value="" />
+		</div>
+		<div class="">
+			<p>病历资料上传</p> <input type="file" name="" id="" value="" /> </div>
+		<div class="">
+			<p>病历资料上传</p> <input type="file" name="" id="" value="" /> </div>
+		<div class="">
+			<p>病历资料上传</p> <input type="file" name="" id="" value="" /> </div>
+	</body>
+	<script type="text/javascript">
+		$('p').click(function() {
+			$(this).siblings('input[type=file]').click();
+		})
+		$('input[type=file]').change(function() {
+			var self = $(this)
+			if($(this).val() == '') {
+				var txt = $(this).siblings('p').attr('data-text');
+				$(this).siblings('p').text(txt);
+			} else {
+				var txt = $(this).siblings('p').text();
+				var read = new FileReader();
+				for (i=0;i<this.files.length;i++) {
+					read.readAsDataURL(this.files[i]);
+					read.onload = function(e) {
+						var src = e.target.result;
+	//					console.log("src", src);
+//						self.siblings('p').attr('data-text', txt).text('').css({'background': 'url(' + src + ')','background-size': 'cover'});
+//						self.closest('div').after('<img src="'+src+'"/>')
+	//					var formData = new FormData();
+	//					console.log(self[0].files)
+	//    				var fileNumber = self[0].files.length;
+	//    				formData.append("filelSavePath",'./img');
+	//					$.ajax({
+	//			            type:"post",
+	//			            url:'#',
+	//			            data:self.files,
+	//			            success:function(data){
+	//			            	
+	//			            },
+	//			            error:function(e){
+	//			
+	//			            }
+	//			        });
+					};
+				}
+				console.log(this.value)
+				
+			}
+		})
+	</script>
+</html>

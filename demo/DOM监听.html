@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			div#box {
+				width: 300px;
+				height: 300px;
+				background: #000000;
+			}
+			
+			div.child {
+				width: 300px;
+				height: 150px;
+				background: #F00;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box">
+			<div id="child" class="child"></div>
+		</div>
+		<script type="text/javascript">
+			var i=0;
+			var callback = function(records) {
+				records.map(function(record) {
+					var obj = document.getElementsByClassName('child')[i];
+					obj.style.width = '300px';
+					obj.style.height = '150px';
+					obj.style.background = '#0f0';
+				});
+			};
+			var obser = new MutationObserver(callback);
+			var obj = document.getElementById('box');
+			var options = {
+				childList: true
+			};
+			obser.observe(obj, options); //开始监听
+			console.log(45453)
+			obj.onclick = function() {
+//				var obj = document.getElementsByClassName('child')[0];
+//				obj.style.height = '100px';	
+				var child = document.createElement('div');
+				child.setAttribute('class','child');
+				obj.appendChild(child);
+			};
+		</script>
+	</body>
+
+</html>

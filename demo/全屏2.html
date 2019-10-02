@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			video{background: url(cat.svg);}
+		</style>
+	</head>
+	<body>
+		<video width="800" height="600">
+			<source src="myvideo.mp4" type="video/mp4"></source>
+			<source src="myvideo.ogv" type="video/ogg"></source>
+			<source src="myvideo.webm" type="video/webm"></source>
+			<object width="" height="" type="application/x-shockwave-flash" data="myvideo.swf">
+				<param name="movie" value="myvideo.swf" />
+				<param name="flashvars" value="autostart=true&amp;file=myvideo.swf" />
+			</object>
+			当前浏览器不支持 video直接播放，点击这里下载视频： <a href="myvideo.webm">下载视频</a>
+		</video>
+		
+		<img src="cat.svg" title="双击全屏显示" />
+		<script type="text/javascript">
+			var img = document.getElementsByTagName('img')[0];
+			img.ondblclick = function() {
+				if(img.title == '双击全屏显示') {
+					fullscreen(this)
+					img.title = '双击退出全屏';
+				} else {
+					exitFullscreen();
+					img.title = '双击全屏显示';
+				}
+				return false;
+			}
+
+			function fullscreen(docElm) {
+				//W3C 
+				if(docElm.requestFullscreen) {
+					docElm.requestFullscreen();
+				}
+				//FireFox 
+				else if(docElm.mozRequestFullScreen) {
+					docElm.mozRequestFullScreen();
+				}
+				//Chrome等 
+				else if(docElm.webkitRequestFullScreen) {
+					docElm.webkitRequestFullScreen();
+				}
+			}
+			function exitFullscreen() {
+				if(document.exitFullscreen) {
+					document.exitFullscreen();
+				} else if(document.mozCancelFullScreen) {
+					document.mozCancelFullScreen();
+				} else if(document.webkitCancelFullScreen) {
+					document.webkitCancelFullScreen();
+				} else if(document.msExitFullscreen) {
+					document.msExitFullscreen();
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			div {
+				overflow: hidden;
+				position: relative;
+				width: 100vw;
+				height: 100vh;
+				background: #000000;
+			}
+			
+			div:after {
+				content: '';
+				display: block;
+				width: 100%;
+				height: 100%;
+				background-color: transparent !important;
+				border: 0 !important;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 9999;
+			}
+			
+			object {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			
+			button{
+				width: 40px;
+				background: #028eed;
+				font-size: 14px;
+				font-weight: 600;
+				color: #fff;
+				border: 0;
+				border-radius: 4px;
+				-webkit-border-radius: 4px;
+				padding: 6px;
+				position: fixed;
+				right: 10px;
+				bottom: 10px;
+				z-index: 99999;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<!--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" >
+				<image preserveAspectRatio="none" image-rendering="optimizeSpeed" xlink:href="病理-3.svg" />
+		</svg>-->
+		<img width="100px" height="100px" src="1.svg"/>	
+		<canvas id="cav" width="300" height="300"></canvas>
+		<button id="FullScreen">全屏显示</button>
+		<div id="imgwrap">
+			<object id="imgshow" data="1.svg" width="100%" height="100%" type="image/svg+xml" codebase="http://www.adobe.com/svg/viewer/imstall/" ></object>
+		</div>
+	</body>
+		<script type="text/javascript">
+			var cav = document.getElementById("cav");
+			var cvs = cav.getContext('2d');
+			var img = document.getElementsByTagName('img')[0];
+			var imgs = document.getElementById('imgshow');
+			imgs.onload = function () {
+				cvs.drawImage(img,0,0,200,300);
+			}
+			var scale = 1;
+			var max = Infinity;
+			var min = 0.1;
+			var fold = 0.1;
+			var isMove = false;
+			var move = {
+				moveX: 0,
+				moveY: 0
+			};
+			imgs.onmouseover = function() {
+				wheel(imgs, function() {
+					console.log(scale);
+					scale = scale >= max ? max : +(scale + fold).toFixed(1);
+					img.style.transform = 'scale(' + scale + ')';
+				}, function() {
+					scale = scale <= min ? min : +(scale - fold).toFixed(1);
+					console.log(scale);
+					img.style.transform = 'scale(' + scale + ')';
+				})
+				return false;
+			}
+			imgs.onmousedown = function(ev) {
+				isMove = true;
+				imgs.style.cursor = 'move';
+				var box = windowToSvg(ev.clientX, ev.clientY);
+				move.moveX = box.x;
+				move.moveY = box.y;
+				console.log(move)
+				return false;
+			}
+			imgs.onmouseup = function() {
+				isMove = false;
+				imgs.style.cursor = 'default';
+				return false;
+			}
+			imgs.onmouseout = function() {
+				isMove = false;
+				imgs.style.cursor = 'default';
+				return false;
+			}
+			imgs.onmousemove = function(ev) {
+				if(isMove) {
+					var box = windowToSvg(ev.clientX, ev.clientY);
+					var imgMove = img.getBoundingClientRect();
+					img.style.left = imgMove.left + box.x - move.moveX + 'px';
+					img.style.top = imgMove.top + box.y - move.moveY + 'px';
+					move.moveX = box.x;
+					move.moveY = box.y;
+				}
+				return false;
+			}
+
+			function wheel(obj, fnDown, fnUp) {
+				var use = window.navigator.userAgent.toLowerCase();
+				if(use.indexOf('firefox') == '-1') {
+					obj.addEventListener('mousewheel', fn); //此事件写法不兼容IE
+				} else {
+					obj.addEventListener('DOMMouseScroll', fn); //此事件写法不兼容IE
+				}
+
+				function fn(ev) {
+					console.log(obj);
+					var down = true;
+					if(ev.detail) {
+						down = ev.detail > 0 ? false : true; //火狐滚轮上正，下负
+					} else {
+						down = ev.wheelDelta < 0 ? false : true; //除火狐外滚轮上负，下正
+					}
+					if(down) {
+						fnUp();
+					} else {
+						fnDown();
+					}
+					return false;
+				}
+			}
+
+			function windowToSvg(x, y) {
+				var box = imgs.getBoundingClientRect();
+				return {
+					x: x - box.left,
+					y: y - box.top
+				}
+			}
+			var btn = document.getElementById("FullScreen");
+			btn.onclick = function() {
+				if (btn.innerText == '全屏显示') {
+					var docElm = document.documentElement;
+					//W3C 
+					if(docElm.requestFullscreen) {
+						docElm.requestFullscreen();
+					}
+					//FireFox 
+					else if(docElm.mozRequestFullScreen) {
+						docElm.mozRequestFullScreen();
+					}
+					//Chrome等 
+					else if(docElm.webkitRequestFullScreen) {
+						docElm.webkitRequestFullScreen();
+					}
+					btn.innerText = '取消全屏';
+				} else{
+					if(document.exitFullscreen) {
+						document.exitFullscreen();
+					} else if(document.mozCancelFullScreen) {
+						document.mozCancelFullScreen();
+					} else if(document.webkitCancelFullScreen) {
+						document.webkitCancelFullScreen();
+					} else if(document.msExitFullscreen) {
+						document.msExitFullscreen();
+					}
+					btn.innerText = '全屏显示';
+				}
+			}
+		</script>
+</html>

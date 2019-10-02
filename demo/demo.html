@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			div#imgmove {
+				/*overflow: hidden;*/
+				width: 300px;
+				height: 300px;
+				background: #000000;
+			}
+			
+			div#imgwrap {
+				/*overflow: hidden;*/
+				width: 300px;
+				height: 300px;
+				background: #F00;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="imgmove">
+			<div id="imgwrap"></div>
+		</div>
+
+		<script type="text/javascript">
+			var imgs = document.getElementById("imgwrap");
+			var img = document.getElementById("imgmove");
+			var scale = 1;
+			var max = 4;
+			var min = 0.1;
+			var fold = 0.1;
+			var isMove = false;
+			var move = {
+				moveX: 0,
+				moveY: 0,
+				translateX: 0,
+				translateY: 0
+			};
+			document.onmouseover = function() {
+				wheel(img, function() {
+					scale = scale >= max ? max : +(scale + fold).toFixed(1);
+					imgs.style.transform = 'scale(' + scale + ')';
+				}, function() {
+					scale = scale <= min ? min : +(scale - fold).toFixed(1);
+					imgs.style.transform = 'scale(' + scale + ')';
+				})
+				return false;
+			}
+			document.onmousedown = function(ev) {
+				isMove = true;
+				img.style.cursor = 'move';
+				var box = windowToSvg(ev.clientX, ev.clientY);
+				move.moveX = box.x;
+				move.moveY = box.y;
+				console.log(move)
+				return false;
+			}
+			document.onmouseup = function() {
+				isMove = false;
+				img.style.cursor = 'default';
+				return false;
+			}
+			document.onmouseout = function() {
+				isMove = false;
+				img.style.cursor = 'default';
+				return false;
+			}
+			document.onmousemove = function(ev) {
+				if(isMove) {
+					var box = windowToSvg(ev.clientX, ev.clientY);
+					var imgMove = imgs.getBoundingClientRect();
+					move.translateX = imgMove.left+(box.x-move.moveX);
+					move.translateY = imgMove.top+(box.y-move.moveY);
+					img.style.transform = 'translate('+move.translateX+'px,'+move.translateY+'px)';
+//					imgs.style.top = imgMove.top + box.y - move.moveY + 'px';
+					move.moveX = box.x;
+					move.moveY = box.y;
+				}
+				return false;
+			}
+
+			function wheel(obj, fnDown, fnUp) {
+				var use = window.navigator.userAgent.toLowerCase();
+				if(use.indexOf('firefox') == '-1') {
+					obj.addEventListener('mousewheel', fn); //此事件写法不兼容IE
+				} else {
+					obj.addEventListener('DOMMouseScroll', fn); //此事件写法不兼容IE
+				}
+
+				function fn(ev) {
+					console.log(obj);
+					var down = true;
+					if(ev.detail) {
+						down = ev.detail > 0 ? false : true; //火狐滚轮上正，下负
+					} else {
+						down = ev.wheelDelta < 0 ? false : true; //除火狐外滚轮上负，下正
+					}
+					if(down) {
+						fnUp();
+					} else {
+						fnDown();
+					}
+					return false;
+				}
+			}
+
+			function windowToSvg(x, y) {
+				var box = imgs.getBoundingClientRect();
+				return {
+					x: x - box.left,
+					y: y - box.top
+				}
+			}
+		</script>
+	</body>
+
+</html>
